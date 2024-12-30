@@ -1,6 +1,6 @@
-<div class="my-5">
+<div >
   <div
-    class="flex justify-center content-center overflow-hidden whitespace-nowrap gap-5 mt-10"
+    class="flex justify-center content-center overflow-hidden whitespace-nowrap gap-5 mt-10 w-1920"
   >
     <div class="shrink-0 h-48 animate-scroll">
       <img
@@ -82,7 +82,7 @@
   </div>
 
   <div
-    class="flex justify-center content-center overflow-hidden whitespace-nowrap gap-5 mt-10"
+    class="flex justify-center content-center overflow-hidden whitespace-nowrap gap-5 mt-10 w-1920"
   >
     <div class="shrink-0 h-48 animate-scrollReverse">
       <img

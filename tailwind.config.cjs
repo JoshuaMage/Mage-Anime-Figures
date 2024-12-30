@@ -15,7 +15,7 @@ module.exports = {
       '500': '550px'
     },
     width: {
-      '1300': '1300px'
+      '1920': '1920px'
     },
     keyframes: {
       scroll: {
