@@ -1,0 +1,6 @@
+/* src/styles.css */
+
+/* Tailwind base imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
