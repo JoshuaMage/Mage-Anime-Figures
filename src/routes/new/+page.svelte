@@ -4,7 +4,7 @@
 	import FilterSizeImage3 from '../../svg/filterSizeImage3.svelte';
 	import FilterSizeImage4 from '../../svg/filterSizeImage4.svelte';
 	import ArrowUpIcon from '../../svg/arrowUpIcon.svelte';
-	import NewANimeFigures from './newAnimeFigures.svelte';
+	import NewAnimeFigures from './newAnimeFigures/+page.svelte'
 
 	let filterItem = false;
 	let inStock = true;
@@ -193,7 +193,7 @@
 			{/if}
 
 			<div class="basis-[90%]">
-				<NewANimeFigures />
+				<NewAnimeFigures />
 			</div>
 		</div>
 	</div>
