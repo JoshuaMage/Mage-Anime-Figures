@@ -18,7 +18,7 @@
 </script>
 
 
-<div class=" flex flex-col overflow-x-hidden bg-slate-950 text-slate-50 ">
+<div class=" flex flex-col bg-slate-950 text-slate-50 ">
 	<div class="flex content-center justify-center gap-20 py-2 container">
 		<button onclick={handleArrow} class="hover:font-bold"> &#11164 </button>
 		{#if toggleArrow}

@@ -36,36 +36,45 @@
 	function nextPage() {
 		if (currentPage < totalPages - 1) {
 			currentPage++;
+			scrollToTop();
 		}
 	}
 
 	function previousPage() {
 		if (currentPage > 0) {
 			currentPage--;
+			scrollToTop();
 		}
+	}
+
+	function scrollToTop() {
+		window.scrollTo({
+			top:0,
+			behavior: 'smooth' 
+		})
 	}
 </script>
 
-<div class="container my-5 grid grid-cols-3 grid-rows-3">
+<div class="container my-5 grid grid-cols-3 grid-rows-3 p-5 ">
 	{#each Object.entries(newFiguresAnime[0]).slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage) as [name, item]}
-		<div>
-			<div class="relative">
+		<div class="mb-10 mr-8 grid grid-rows-2 bg-black rounded-2xl" style="grid-template-rows: 80% 20% ">
+			<div class="h-full relative mx-7 mt-4 pb-3 ">
 				<img
 					src={item.image[currentIndexes[name]]}
 					alt={`${name} image ${currentIndexes[name] + 1}`}
-					class="mt-5 h-[400px] w-[100%] object-fill px-1"
+					class=" h-[500px] w-[100%] object-fill rounded-xl"
 				/>
 				<button
 					onclick={() => showPreviousImage(name)}
-					class="absolute bottom-44 left-4 rounded-full hover:px-1"><LeftiCon /></button
+					class="absolute bottom-[50%] right-[87%] rounded-full"><LeftiCon /></button
 				>
-				<button onclick={() => showNextImage(name)} class="absolute bottom-44 right-4 hover:px-1"
+				<button onclick={() => showNextImage(name)} class="absolute bottom-[50%] left-[87%]"
 					><RightIcon /></button
 				>
 			</div>
 
-			<div class="relative flex">
-				<div class="flex-1">
+			<div class="relative flex items-center justify-center bg-transparent  ">
+				<div>
 					<h6 class="text-start text-xs">
 						<span
 							class={`${item.availability === 'Pre-Order' ? 'text-green-400' : 'text-red-400'} text-5xl`}
@@ -78,7 +87,7 @@
 					<h2 class="ita mt-2 text-start text-xl font-bold">${item.price}</h2>
 				</div>
 
-				<div class="absolute right-6 top-0 mt-5">
+				<div>
 					<!-- svelte-ignore a11y_consider_explicit_label -->
 					<button class="rounded-full bg-blue-900 px-2 py-2 text-white hover:bg-white"
 						><svg
@@ -122,8 +131,76 @@
 	{/each}
 </div>
 
-<div class="pagination-controls">
-	<button onclick={previousPage} disabled={currentPage === 0}>Previous</button>
-	<span>Page {currentPage + 1} of {totalPages}</span>
-	<button onclick={nextPage} disabled={currentPage === totalPages - 1}>Next</button>
+<div class="my-3 flex h-[5rem] content-center justify-center text-center">
+	<button onclick={previousPage} disabled={currentPage === 0}
+		><svg
+			width="50px"
+			height="50px"
+			viewBox="0 0 32 32"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="#000000"
+			><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+				id="SVGRepo_tracerCarrier"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			></g><g id="SVGRepo_iconCarrier">
+				<defs>
+					<style>
+						.cls-1 {
+							fill: #8c9eff;
+						}
+						.cls-2 {
+							fill: #5f7cf9;
+						}
+					</style>
+				</defs> <title></title>
+				<g id="Left">
+					<path
+						class="cls-1"
+						d="M20.48,10.13a1,1,0,0,0-1,0l-8,5a1,1,0,0,0,0,1.7l8,5A1,1,0,0,0,20,22a.91.91,0,0,0,.48-.13A1,1,0,0,0,21,21V11A1,1,0,0,0,20.48,10.13Z"
+					></path>
+					<path
+						class="cls-2"
+						d="M11,16h0a1,1,0,0,0,.47.85l8,5A1,1,0,0,0,20,22a.91.91,0,0,0,.48-.13A1,1,0,0,0,21,21V16Z"
+					></path>
+				</g>
+			</g></svg
+		></button
+	>
+	<p class="mx-10 content-center text-lg">Page {currentPage + 1} of {totalPages}</p>
+	<button onclick={nextPage} disabled={currentPage === totalPages - 1}
+		><svg
+			width="50px"
+			height="50px"
+			viewBox="0 0 32 32"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="#000000"
+			><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+				id="SVGRepo_tracerCarrier"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			></g><g id="SVGRepo_iconCarrier">
+				<defs>
+					<style>
+						.cls-1 {
+							fill: #8c9eff;
+						}
+						.cls-2 {
+							fill: #5f7cf9;
+						}
+					</style>
+				</defs> <title></title>
+				<g id="Right">
+					<path
+						class="cls-1"
+						d="M20.53,15.15l-8-5A1,1,0,0,0,11,11V21a1,1,0,0,0,.52.87A.91.91,0,0,0,12,22a1,1,0,0,0,.53-.15l8-5a1,1,0,0,0,0-1.7Z"
+					></path>
+					<path
+						class="cls-2"
+						d="M21,16H11v5a1,1,0,0,0,.52.87A.91.91,0,0,0,12,22a1,1,0,0,0,.53-.15l8-5A1,1,0,0,0,21,16Z"
+					></path>
+				</g>
+			</g></svg
+		></button
+	>
 </div>
