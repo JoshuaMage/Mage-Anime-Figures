@@ -46,22 +46,22 @@
 									class="absolute flex w-[200px] flex-col gap-2 bg-black px-1 py-3 text-start"
 								>
 									<a
-										href="/anime/onepiece"
+										href="/onepiece"
 										class="rounded-md px-2 hover:bg-white hover:font-semibold hover:text-black"
 										>One-Piece</a
 									>
 									<a
-										href="/anime/naruto"
+										href="/naruto"
 										class="rounded-md px-2 hover:bg-white hover:font-semibold hover:text-black"
 										>Naruto</a
 									>
 									<a
-										href="/anime/bleach"
+										href="/bleach"
 										class="rounded-md px-2 hover:bg-white hover:font-semibold hover:text-black"
 										>Bleach</a
 									>
 									<a
-										href="/anime/assorted"
+										href="/assorted"
 										class="rounded-md px-2 hover:bg-white hover:font-semibold hover:text-black"
 										>Assorted</a
 									>

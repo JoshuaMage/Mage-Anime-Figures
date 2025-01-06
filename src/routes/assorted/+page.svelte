@@ -1,21 +1,22 @@
 <script>
 	import FilterSelection from '../components/filterSelection/+page.svelte';
-	import ProductsFigures from '../components/productsFigures/+page.svelte'
-	import {newFiguresAnime } from '../../Products/new/newProduct' 
+	import ProductsFigures from '../components/productsFigures/+page.svelte';
+	import { newFiguresAnime } from '../../Products/new/newProduct';
 </script>
 
 <div
 	class="min-w-screen flex min-h-screen flex-col overflow-x-hidden bg-slate-950 text-center text-slate-50"
 >
-	<div class="py-16 mt-7">
-		<h1 class="text-6xl font-bold italic tracking-widest text-orange">NEW</h1>
+	<div class="mt-7 py-16">
+		<h1 class="text-6xl font-bold italic tracking-widest text-orange">Assorted</h1>
 		<p class="mt-5 text-xl tracking-wider">
-			Shop <strong>NEW</strong> arrivals from your favorite anime brands including, BlueLock, <br />
+			Shop <strong>Assorted</strong> arrivals from your favorite anime brands including, BlueLock,
+			<br />
 			Bleach, OnePiece, Naruto and other incoming New anime!
 			<strong> Mage Premium Member </strong>get EARLY ACCESS to select new Product drops
 		</p>
 	</div>
 	<FilterSelection>
-<ProductsFigures data={newFiguresAnime } itemsPerPage={9}/>
+		<ProductsFigures data={newFiguresAnime} itemsPerPage={9} />
 	</FilterSelection>
 </div>
