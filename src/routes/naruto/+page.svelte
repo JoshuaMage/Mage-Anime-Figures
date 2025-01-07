@@ -2,6 +2,10 @@
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { narutoFiguresAnime } from '../../Products/naruto/index';
+
+	let gridCols = 4;
+	let gridRows = 3;
+	let itemsPerPage = 9;
 </script>
 
 <div
@@ -18,7 +22,7 @@
 			these figures are the perfect addition to any collection.
 		</p>
 	</div>
-	<FilterSelection>
-		<ProductsFigures data={narutoFiguresAnime} itemsPerPage={9} />
+	<FilterSelection bind:gridCols bind:gridRows bind:itemsPerPage>
+		<ProductsFigures data={narutoFiguresAnime} {itemsPerPage} {gridCols} {gridRows} />
 	</FilterSelection>
 </div>

@@ -2,12 +2,16 @@
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { bleachFiguresAnime } from '../../Products/BLEACH/index';
+
+	let gridCols = 4;
+	let gridRows = 3;
+	let itemsPerPage = 9;
 </script>
 
 <div
 	class="min-w-screen flex min-h-screen flex-col overflow-x-hidden bg-slate-950 text-center text-slate-50"
 >
-	<div class="py-16 mt-7">
+	<div class="mt-7 py-16">
 		<h1 class="text-6xl font-bold uppercase italic tracking-widest text-orange">bleach</h1>
 		<p class="mt-5 text-xl tracking-wider">
 			Step into the world of <strong class="uppercase">Bleach anime figures!</strong>
@@ -19,7 +23,7 @@
 			collection.
 		</p>
 	</div>
-	<FilterSelection>
-		<ProductsFigures data={bleachFiguresAnime} itemsPerPage={9} />
+	<FilterSelection bind:gridCols bind:gridRows bind:itemsPerPage>
+		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} />
 	</FilterSelection>
 </div>

@@ -2,6 +2,10 @@
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { newFiguresAnime } from '../../Products/new/newProduct';
+
+	let gridCols = 4;
+	let gridRows = 3;
+	let itemsPerPage = 9;
 </script>
 
 <div
@@ -16,7 +20,7 @@
 			<strong> Mage Premium Member </strong>get EARLY ACCESS to select new Product drops
 		</p>
 	</div>
-	<FilterSelection>
-		<ProductsFigures data={newFiguresAnime} itemsPerPage={9} />
+<FilterSelection bind:gridCols bind:gridRows bind:itemsPerPage>
+		<ProductsFigures data={newFiguresAnime} {itemsPerPage} {gridCols} {gridRows} />
 	</FilterSelection>
 </div>

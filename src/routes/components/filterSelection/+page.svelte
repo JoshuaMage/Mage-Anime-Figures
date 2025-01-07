@@ -5,6 +5,10 @@
 	import FilterSizeImage4 from '../../../svg/filterSizeImage4.svelte';
 	import ArrowUpIcon from '../../../svg/arrowUpIcon.svelte';
 
+	export let gridCols = 3;
+	export let gridRows = 3;
+	export let itemsPerPage = 9;
+
 	let filterItem = false;
 	let inStock = true;
 	let selectAnime = true;
@@ -30,6 +34,18 @@
 	function handlePrice() {
 		selectPrice = !selectPrice;
 	}
+
+	function setGrid3x3() {
+		gridCols = 3;
+		gridRows = 3;
+		itemsPerPage = 9;
+	}
+
+	function setGrid4x4() {
+		gridCols = 4;
+		gridRows = 3;
+		itemsPerPage = 12;
+	}
 </script>
 
 <div>
@@ -44,39 +60,48 @@
 			</div>
 
 			<div class="flex justify-end gap-20">
-				<section>
+				<div class="relative">
 					<button class="flex" onclick={handleFilter}
 						>Sort By New (New to Old) <DropdownIcon /></button
 					>
+
 					{#if filterItem}
 						<ul
-							class="border-md absolute mt-2 rounded-lg border border-x-white bg-black py-3 text-start text-white"
+							class="border-md absolute z-50 mt-2 w-[13rem] rounded-lg border border-x-white bg-black py-3 text-start text-white"
 						>
-							<li class="pr-20 hover:bg-blue-500 hover:text-white">
-								<button>New(New to Old) </button>
+							<li class=" hover:bg-blue-500 hover:text-white">
+								<button>New to Old </button>
 							</li>
 
-							<li class="pr-20 hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-blue-500 hover:text-white">
+								<button>Old to New </button>
+							</li>
+
+							<li class=" hover:bg-blue-500 hover:text-white">
 								<button>Recommended</button>
 							</li>
-							<li class="pr-20 hover:bg-blue-500 hover:text-white">
+
+							<li class=" hover:bg-blue-500 hover:text-white">
 								<button>Name A-Z</button>
 							</li>
-							<li class="pr-20 hover:bg-blue-500 hover:text-white">
+
+							<li class=" hover:bg-blue-500 hover:text-white">
 								<button>Name Z-A</button>
 							</li>
-							<li class="pr-20 hover:bg-blue-500 hover:text-white">
+
+							<li class=" hover:bg-blue-500 hover:text-white">
 								<button>Price(low to high)</button>
 							</li>
-							<li class="pr-20 hover:bg-blue-500 hover:text-white">
+
+							<li class=" hover:bg-blue-500 hover:text-white">
 								<button>Price(Hign to Low)</button>
 							</li>
 						</ul>
 					{/if}
-				</section>
-				<div class="flex justify-end">
-					<button class="hover:fill-orange"><FilterSizeImage3 /></button>
-					<button class="hover:fill-orange"><FilterSizeImage4 /></button>
+				</div>
+				<div class="flex justify-end gap-3">
+					<button class="hover:fill-orange" onclick={setGrid3x3}><FilterSizeImage3 /></button>
+					<button class="hover:fill-orange" onclick={setGrid4x4}><FilterSizeImage4 /></button>
 				</div>
 			</div>
 		</div>

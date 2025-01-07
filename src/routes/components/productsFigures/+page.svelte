@@ -7,10 +7,12 @@
 
 	export let data = [];
 	export let itemsPerPage = 9;
+	export let gridCols = 4;
+	export let gridRows  = 3;
 
 	let currentIndexes = {};
 	let currentPage = 0;
-	let totalPages = Math.ceil(Object.keys(data[0] || {}).length / itemsPerPage);
+	$: totalPages = Math.ceil(Object.keys(data[0] || {}).length / itemsPerPage);
 
 	Object.keys(data[0] || {}).forEach((name) => {
 		currentIndexes[name] = 0;
@@ -58,7 +60,7 @@
 	}
 </script>
 
-<div class="container my-5 grid grid-cols-3 grid-rows-3 p-5">
+<div class={`container my-5 grid grid-cols-${gridCols} grid-rows-${gridRows} p-5`}>
 	{#each Object.entries(data[0] || {}).slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage) as [name, item]}
 		<div class="mb-10 mr-8 grid grid-rows-2 bg-black rounded-2xl" style="grid-template-rows: 80% 20%">
 			<div class="h-full relative mx-7 mt-4 pb-3">

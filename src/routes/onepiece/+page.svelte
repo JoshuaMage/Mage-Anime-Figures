@@ -2,6 +2,10 @@
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { onepieceFiguresAnime } from '../../Products/one-piece/index';
+
+	let gridCols = 4;
+	let gridRows = 3;
+	let itemsPerPage = 9;
 </script>
 
 <div
@@ -18,7 +22,7 @@
 			crafted with incredible detail,<br /> showcasing your favorite characters in their iconic poses.
 		</p>
 	</div>
-	<FilterSelection>
-		<ProductsFigures data={onepieceFiguresAnime} itemsPerPage={9} />
+	<FilterSelection bind:gridCols bind:gridRows bind:itemsPerPage>
+		<ProductsFigures data={onepieceFiguresAnime} {itemsPerPage} {gridCols} {gridRows} />
 	</FilterSelection>
 </div>

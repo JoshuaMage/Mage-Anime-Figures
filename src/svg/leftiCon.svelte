@@ -1,8 +1,8 @@
 <!-- svelte-ignore attribute_illegal_colon -->
 <div>
 	<svg
-		width="40px"
-		height="40px"
+		width="33px"
+		height="33px"
 		viewBox="0 0 32 32"
 		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
