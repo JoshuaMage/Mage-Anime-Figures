@@ -1,4 +1,5 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
 	import FilterIcon from '../../../svg/filterIcon.svelte';
 	import DropdownIcon from '../../../svg/dropdownIcon.svelte';
 	import FilterSizeImage3 from '../../../svg/filterSizeImage3.svelte';
@@ -8,12 +9,18 @@
 	export let gridCols = 3;
 	export let gridRows = 3;
 	export let itemsPerPage = 9;
+	// svelte-ignore export_let_unused
+	export let sortOption = '';
+
+	const dispatch = createEventDispatcher();
 
 	let filterItem = false;
 	let inStock = true;
 	let selectAnime = true;
 	let selectPrice = true;
 	let sideSelection = true;
+
+	let selectedSort = 'New to Old';
 
 	function handleFilter() {
 		filterItem = !filterItem;
@@ -46,6 +53,14 @@
 		gridRows = 3;
 		itemsPerPage = 12;
 	}
+
+	/**
+	 * @param {string} sort
+	 */
+	function handleSortSelection(sort) {
+		selectedSort = sort;
+		dispatch('sortChanged', sort); // Dispatch the sort option to the parent component
+	}
 </script>
 
 <div>
@@ -70,31 +85,35 @@
 							class="border-md absolute z-50 mt-2 w-[13rem] rounded-lg border border-x-white bg-black py-3 text-start text-white"
 						>
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>New to Old </button>
+								<button onclick={() => handleSortSelection('New to Old')}>New to Old </button>
 							</li>
 
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>Old to New </button>
+								<button onclick={() => handleSortSelection('Old to New')}>Old to New </button>
 							</li>
 
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>Recommended</button>
+								<button onclick={() => handleSortSelection('Recommended')}>Recommended</button>
 							</li>
 
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>Name A-Z</button>
+								<button onclick={() => handleSortSelection('Name A-Z')}>Name A-Z</button>
 							</li>
 
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>Name Z-A</button>
+								<button onclick={() => handleSortSelection('Name Z-A')}>Name Z-A</button>
 							</li>
 
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>Price(low to high)</button>
+								<button onclick={() => handleSortSelection('low to high')}
+									>Price(low to high)</button
+								>
 							</li>
 
 							<li class=" hover:bg-blue-500 hover:text-white">
-								<button>Price(Hign to Low)</button>
+								<button onclick={() => handleSortSelection('high to low')}
+									>Price(Hign to Low)</button
+								>
 							</li>
 						</ul>
 					{/if}

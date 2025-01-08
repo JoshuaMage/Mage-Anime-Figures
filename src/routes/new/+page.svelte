@@ -3,7 +3,7 @@
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { newFiguresAnime } from '../../Products/new/newProduct';
 
-	let gridCols = 4;
+	let gridCols = 3;
 	let gridRows = 3;
 	let itemsPerPage = 9;
 </script>

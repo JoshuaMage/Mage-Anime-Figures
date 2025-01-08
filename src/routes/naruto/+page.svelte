@@ -3,7 +3,7 @@
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { narutoFiguresAnime } from '../../Products/naruto/index';
 
-	let gridCols = 4;
+	let gridCols = 3;
 	let gridRows = 3;
 	let itemsPerPage = 9;
 </script>
@@ -11,7 +11,7 @@
 <div
 	class="min-w-screen flex min-h-screen flex-col overflow-x-hidden bg-slate-950 text-center text-slate-50"
 >
-	<div class=" py-16 mt-7">
+	<div class=" mt-7 py-16">
 		<h1 class="text-6xl font-bold uppercase italic tracking-widest text-orange">naruto</h1>
 		<p class="mt-5 text-xl tracking-wider">
 			Step into the world of <strong class="uppercase">Naruto anime figures!</strong>

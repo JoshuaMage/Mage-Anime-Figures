@@ -1,3 +1,5 @@
+
+
 import hitsugaya1 from './image/hitsugaya1.webp'
 import hitsugaya2 from './image/hitsugaya2.webp'
 import hitsugaya3 from './image/hitsugaya3.webp'
@@ -88,7 +90,7 @@ import orihime3 from './image/orihime3.webp'
 import orihime4 from './image/orihime4.webp'
 
 
-export const bleachFiguresAnime = [ {
+export const bleachFiguresAnime =  [ {
     hitsugaya: {
         id: 1,
         image: [hitsugaya1, hitsugaya2, hitsugaya3, hitsugaya4],
@@ -269,3 +271,4 @@ export const bleachFiguresAnime = [ {
     },
 
 }]
+

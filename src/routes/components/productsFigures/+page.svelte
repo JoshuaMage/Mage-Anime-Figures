@@ -7,16 +7,79 @@
 
 	export let data = [];
 	export let itemsPerPage = 9;
-	export let gridCols = 4;
-	export let gridRows  = 3;
+	export let gridCols = 3;
+	export let gridRows = 3;
+	export let sortOption = '';
 
 	let currentIndexes = {};
 	let currentPage = 0;
-	$: totalPages = Math.ceil(Object.keys(data[0] || {}).length / itemsPerPage);
+	let sortedData = [...data];
+
+	$: totalPages = Math.ceil(sortedData.length / itemsPerPage);
+	$: displayedData = sortedData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
 
 	Object.keys(data[0] || {}).forEach((name) => {
 		currentIndexes[name] = 0;
 	});
+
+	function sortByNewToOld(items) {
+    return items.sort((a, b) => b[1].id - a[1].id);
+  }
+
+  function sortByOldToNew(items) {
+    return items.sort((a, b) => a[1].id - b[1].id);
+  }
+
+  function sortByRecommended(items) {
+	return items.sort((a, b) => b[1].price - a[1].price); 
+  }
+
+  function sortByPriceLowToHigh(items) {
+	return items.sort((a, b) => a[1].price - b[1].price);  
+  }
+
+  function sortByPriceHighToLow(items) {
+	return items.sort((a, b) => b[1].price - a[1].price); 
+  }
+
+  function sortByNameAZ(items) {
+ 
+	return items.sort((a, b) => a[1].description.localeCompare(b[1].description));
+
+  }
+
+  function sortByNameZA(items) {
+    return items.sort((a, b) => b[1].description.localeCompare(a[1].description));
+
+	
+  }
+
+
+  function getSortedData(data, sortOption) {
+    const items = Object.entries(data[0]);
+
+    if (sortOption === 'New to Old') {
+        return sortByNewToOld(items);
+    } else if (sortOption === 'Old to New') {
+        return sortByOldToNew(items);
+    } else if (sortOption === 'Recommended') {
+        return sortByRecommended(items);
+    } else if (sortOption === 'low to high') { // Corrected
+        return sortByPriceLowToHigh(items);
+    } else if (sortOption === 'high to low') { // Corrected
+        return sortByPriceHighToLow(items);
+    } else if (sortOption === 'Name A-Z') {
+        return sortByNameAZ(items);
+    } else if (sortOption === 'Name Z-A') {
+        return sortByNameZA(items);
+    } else {
+        return items; // Default case when no sort option is selected
+    }
+}
+
+	$: sortedData = getSortedData(data, sortOption);
+
 
 	function showNextImage(name) {
 		const images = data[0][name].image;
@@ -61,19 +124,25 @@
 </script>
 
 <div class={`container my-5 grid grid-cols-${gridCols} grid-rows-${gridRows} p-5`}>
-	{#each Object.entries(data[0] || {}).slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage) as [name, item]}
-		<div class="mb-10 mr-8 grid grid-rows-2 bg-black rounded-2xl" style="grid-template-rows: 80% 20%">
+	{#each displayedData as [name, item]}
+
+		<div
+			class="mb-10 mr-8 grid grid-rows-2 rounded-2xl bg-black"
+			style="grid-template-rows: 80% 20%"
+		>
 			<div class="h-full relative mx-7 mt-4 pb-3">
 				<img
 					src={item.image[currentIndexes[name]]}
 					alt={`${name} image ${currentIndexes[name] + 1}`}
-					class="h-[100%] w-[100%] object-cover rounded-xl"
+					class="h-[100%] w-[100%] rounded-xl object-cover"
 				/>
 				<button
 					onclick={() => showPreviousImage(name)}
-					class="absolute bottom-[50%] right-[87%] rounded-full"><LeftiCon /></button>
+					class="absolute bottom-[50%] right-[87%] rounded-full"><LeftiCon /></button
+				>
 				<button onclick={() => showNextImage(name)} class="absolute bottom-[50%] left-[87%]"
-					><RightIcon /></button>
+					><RightIcon /></button
+				>
 			</div>
 
 			<div class="relative flex items-center justify-center bg-transparent">
@@ -81,7 +150,6 @@
 					<h6 class="text-start text-xs">
 						<span
 							class={`${item.availability === 'Pre-Order' || item.availability === 'Available' ? 'text-green-400' : 'text-red-400'} text-5xl`}
-							
 						>
 							.
 						</span>
@@ -127,7 +195,8 @@
 									style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"
 								></polyline></g
 							></svg
-						></button>
+						></button
+					>
 				</div>
 			</div>
 		</div>
@@ -135,9 +204,7 @@
 </div>
 
 <div class="my-3 flex h-[5rem] content-center justify-center text-center">
-	<button onclick={previousPage} disabled={currentPage === 0}
-		><PaginationLeft /></button>
+	<button onclick={previousPage} disabled={currentPage === 0}><PaginationLeft /></button>
 	<p class="mx-10 content-center text-lg">Page {currentPage + 1} of {totalPages}</p>
-	<button onclick={nextPage} disabled={currentPage === totalPages - 1}
-		><PaginationRight /></button>
+	<button onclick={nextPage} disabled={currentPage === totalPages - 1}><PaginationRight /></button>
 </div>

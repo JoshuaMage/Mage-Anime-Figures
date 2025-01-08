@@ -1,11 +1,21 @@
 <script>
+// @ts-nocheck
+
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { bleachFiguresAnime } from '../../Products/BLEACH/index';
 
-	let gridCols = 4;
+	let gridCols = 3;
 	let gridRows = 3;
 	let itemsPerPage = 9;
+	let sortOption = 'New to Old';
+
+	/**
+	 * @param {{ detail: string; }} event
+	 */
+	function handleSortChanged(event) {
+		sortOption = event.detail; // Update the sort option when changed
+	}
 </script>
 
 <div
@@ -23,7 +33,17 @@
 			collection.
 		</p>
 	</div>
-	<FilterSelection bind:gridCols bind:gridRows bind:itemsPerPage>
-		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} />
+
+	<FilterSelection
+		bind:gridCols
+		bind:gridRows
+		bind:itemsPerPage
+		{sortOption}
+		on:sortChanged={handleSortChanged}
+	>
+		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} 
+		{sortOption} />
+		
+		
 	</FilterSelection>
 </div>
