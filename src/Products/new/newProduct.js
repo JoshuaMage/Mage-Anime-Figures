@@ -308,7 +308,7 @@ export const newFiguresAnime = [ {
         id: 25,
         image: [geto1, geto2, geto3, geto4],
         availability: 'Pre-Order',
-        description: 'v',
+        description: 'FREEing Jujutsu Kaisen 0 1/4 Scale Figure Suguru Geto',
         price: 799.55,
         currentIndex: 0
     },

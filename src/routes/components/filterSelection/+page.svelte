@@ -11,6 +11,7 @@
 	export let itemsPerPage = 9;
 	// svelte-ignore export_let_unused
 	export let sortOption = '';
+	export let currentPage = 0;
 
 	const dispatch = createEventDispatcher();
 
@@ -59,8 +60,22 @@
 	 */
 	function handleSortSelection(sort) {
 		selectedSort = sort;
-		dispatch('sortChanged', sort); // Dispatch the sort option to the parent component
+		dispatch('sortChanged', sort); 
+		dispatch('resetImages');
+		currentPage = 0;
+		scrollToTop();
+		filterItem = false; 
 	}
+
+	
+    function scrollToTop() {
+    if (typeof window !== 'undefined') {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
 </script>
 
 <div>
@@ -76,9 +91,9 @@
 
 			<div class="flex justify-end gap-20">
 				<div class="relative">
-					<button class="flex" onclick={handleFilter}
-						>Sort By New (New to Old) <DropdownIcon /></button
-					>
+					<button class="flex gap-2" onclick={handleFilter}>
+						Sort By <span>({selectedSort})</span> <DropdownIcon />
+					</button>
 
 					{#if filterItem}
 						<ul

@@ -18,68 +18,64 @@
 	$: totalPages = Math.ceil(sortedData.length / itemsPerPage);
 	$: displayedData = sortedData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
-
+	// Initialize currentIndexes for each item
 	Object.keys(data[0] || {}).forEach((name) => {
-		currentIndexes[name] = 0;
+		if (currentIndexes[name] === undefined) {
+			currentIndexes[name] = 0;
+		}
 	});
 
 	function sortByNewToOld(items) {
-    return items.sort((a, b) => b[1].id - a[1].id);
-  }
+		return items.sort((a, b) => b[1].id - a[1].id);
+	}
 
-  function sortByOldToNew(items) {
-    return items.sort((a, b) => a[1].id - b[1].id);
-  }
+	function sortByOldToNew(items) {
+		return items.sort((a, b) => a[1].id - b[1].id);
+	}
 
-  function sortByRecommended(items) {
-	return items.sort((a, b) => b[1].price - a[1].price); 
-  }
+	function sortByRecommended(items) {
+		return items.sort((a, b) => b[1].price - a[1].price);
+	}
 
-  function sortByPriceLowToHigh(items) {
-	return items.sort((a, b) => a[1].price - b[1].price);  
-  }
+	function sortByPriceLowToHigh(items) {
+		return items.sort((a, b) => a[1].price - b[1].price);
+	}
 
-  function sortByPriceHighToLow(items) {
-	return items.sort((a, b) => b[1].price - a[1].price); 
-  }
+	function sortByPriceHighToLow(items) {
+		return items.sort((a, b) => b[1].price - a[1].price);
+	}
 
-  function sortByNameAZ(items) {
- 
-	return items.sort((a, b) => a[1].description.localeCompare(b[1].description));
+	function sortByNameAZ(items) {
+		return items.sort((a, b) => a[1].description.localeCompare(b[1].description));
+	}
 
-  }
+	function sortByNameZA(items) {
+		return items.sort((a, b) => b[1].description.localeCompare(a[1].description));
+	}
 
-  function sortByNameZA(items) {
-    return items.sort((a, b) => b[1].description.localeCompare(a[1].description));
+	function getSortedData(data, sortOption) {
+		const items = Object.entries(data[0]);
 
-	
-  }
-
-
-  function getSortedData(data, sortOption) {
-    const items = Object.entries(data[0]);
-
-    if (sortOption === 'New to Old') {
-        return sortByNewToOld(items);
-    } else if (sortOption === 'Old to New') {
-        return sortByOldToNew(items);
-    } else if (sortOption === 'Recommended') {
-        return sortByRecommended(items);
-    } else if (sortOption === 'low to high') { // Corrected
-        return sortByPriceLowToHigh(items);
-    } else if (sortOption === 'high to low') { // Corrected
-        return sortByPriceHighToLow(items);
-    } else if (sortOption === 'Name A-Z') {
-        return sortByNameAZ(items);
-    } else if (sortOption === 'Name Z-A') {
-        return sortByNameZA(items);
-    } else {
-        return items; // Default case when no sort option is selected
-    }
-}
+		if (sortOption === 'New to Old') {
+			return sortByNewToOld(items);
+		} else if (sortOption === 'Old to New') {
+			return sortByOldToNew(items);
+		} else if (sortOption === 'Recommended') {
+			return sortByRecommended(items);
+		} else if (sortOption === 'low to high') {
+			return sortByPriceLowToHigh(items);
+		} else if (sortOption === 'high to low') {
+			return sortByPriceHighToLow(items);
+		} else if (sortOption === 'Name A-Z') {
+			return sortByNameAZ(items);
+		} else if (sortOption === 'Name Z-A') {
+			return sortByNameZA(items);
+		} else {
+			return items;
+		}
+	}
 
 	$: sortedData = getSortedData(data, sortOption);
-
 
 	function showNextImage(name) {
 		const images = data[0][name].image;
@@ -116,16 +112,17 @@
 	}
 
 	function scrollToTop() {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth'
-		});
+		if (typeof window !== 'undefined') {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
 	}
 </script>
 
 <div class={`container my-5 grid grid-cols-${gridCols} grid-rows-${gridRows} p-5`}>
 	{#each displayedData as [name, item]}
-
 		<div
 			class="mb-10 mr-8 grid grid-rows-2 rounded-2xl bg-black"
 			style="grid-template-rows: 80% 20%"

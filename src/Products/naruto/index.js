@@ -231,7 +231,7 @@ export const narutoFiguresAnime = [ {
         id: 17,
         image: [hinataAnbu1, hinataAnbu2, hinataAnbu3, hinataAnbu4],
         availability: 'Available',
-        description: 'hinataAnbu',
+        description: '[REISSUE] Nendoroid 879 Hinata Hyuga - Naruto Shippuden',
         price: 29,
         currentIndex: 0
     },

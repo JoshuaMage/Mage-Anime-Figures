@@ -6,6 +6,14 @@
 	let gridCols = 3;
 	let gridRows = 3;
 	let itemsPerPage = 9;
+	let sortOption = 'New to Old';
+
+	/**
+	 * @param {{ detail: string; }} event
+	 */
+	function handleSortChanged(event) {
+		sortOption = event.detail; // Update the sort option when changed
+	}
 </script>
 
 <div
@@ -22,7 +30,13 @@
 			crafted with incredible detail,<br /> showcasing your favorite characters in their iconic poses.
 		</p>
 	</div>
-	<FilterSelection bind:gridCols bind:gridRows bind:itemsPerPage>
-		<ProductsFigures data={onepieceFiguresAnime} {itemsPerPage} {gridCols} {gridRows} />
+	<FilterSelection
+		bind:gridCols
+		bind:gridRows
+		bind:itemsPerPage
+		{sortOption}
+		on:sortChanged={handleSortChanged}
+	>
+		<ProductsFigures data={onepieceFiguresAnime} {itemsPerPage} {gridCols} {gridRows}  	{sortOption}/>
 	</FilterSelection>
 </div>
