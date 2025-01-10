@@ -2,41 +2,38 @@
 module.exports = {
 	content: ["./src/**/*.{html,js,svelte}"],
 	theme: {
-		container: {
-			center: true,
-
-		},
+	  container: {
+		center: true,
+	  },
 	  extend: {
 		fontFamily: {
 		  rowdies: ['Rowdies', 'sans-serif'],
-		  Roboto: ['Roboto', 'sans-serif']
+		  roboto: ['Roboto', 'sans-serif'], // Ensure consistent casing
 		},
 		colors: {
-		  orange: '#FF5F00'
-		}
-	  },
-	  height: {
-		'500': '550px'
-	  },
-	  width: {
-		'1920': '1920px'
-	  },
-	  keyframes: {
-		scroll: {
-		  '0%': { transform: 'translateX(100%)' },
-		  '100%': { transform: 'translateX(-100%)' }
+		  orange: '#FF5F00',
 		},
-		scrollReverse: {
-		  '0%': { transform: 'translateX(-100%)' },
-		  '100%': { transform: 'translateX(100%)' }
-		}
-  
-		
+		height: {
+		  '500': '550px',
+		},
+		width: {
+		  '1920': '1920px',
+		},
+		keyframes: {
+		  scroll: {
+			'0%': { transform: 'translateX(100%)' },
+			'100%': { transform: 'translateX(-100%)' },
+		  },
+		  scrollReverse: {
+			'0%': { transform: 'translateX(-100%)' },
+			'100%': { transform: 'translateX(100%)' },
+		  },
+		},
+		animation: {
+		  scroll: 'scroll 30s linear infinite',
+		  scrollReverse: 'scrollReverse 30s linear infinite',
+		},
 	  },
-	  animation: {
-		scroll: 'scroll 30s linear infinite',
-		scrollReverse: 'scrollReverse 30s linear infinite'
-	  }
 	},
 	plugins: [],
   }

@@ -1,4 +1,5 @@
 <script>
+	import { allPageData } from '$lib/store';
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { newFiguresAnime } from '../../Products/new/newProduct';
@@ -8,6 +9,12 @@
 	let itemsPerPage = 9;
 
 	let sortOption = 'New to Old';
+
+	allPageData.update((data) => ({
+    ...data,
+    // @ts-ignore
+    newData: index4, // store data for page 1
+  }));
 
 	/**
 	 * @param {{ detail: string; }} event

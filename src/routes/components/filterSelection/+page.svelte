@@ -5,6 +5,7 @@
 	import FilterSizeImage3 from '../../../svg/filterSizeImage3.svelte';
 	import FilterSizeImage4 from '../../../svg/filterSizeImage4.svelte';
 	import ArrowUpIcon from '../../../svg/arrowUpIcon.svelte';
+	import { writable } from 'svelte/store';
 
 	export let gridCols = 3;
 	export let gridRows = 3;
@@ -12,16 +13,17 @@
 	// svelte-ignore export_let_unused
 	export let sortOption = '';
 	export let currentPage = 0;
+	export let showSelectionAnimeBrand = true;
 
 	const dispatch = createEventDispatcher();
-
 	let filterItem = false;
 	let inStock = true;
 	let selectAnime = true;
 	let selectPrice = true;
 	let sideSelection = true;
-
 	let selectedSort = 'New to Old';
+
+	//store for input sorting
 
 	function handleFilter() {
 		filterItem = !filterItem;
@@ -60,22 +62,21 @@
 	 */
 	function handleSortSelection(sort) {
 		selectedSort = sort;
-		dispatch('sortChanged', sort); 
+		dispatch('sortChanged', sort);
 		dispatch('resetImages');
 		currentPage = 0;
 		scrollToTop();
-		filterItem = false; 
+		filterItem = false;
 	}
 
-	
-    function scrollToTop() {
-    if (typeof window !== 'undefined') {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-}
+	function scrollToTop() {
+		if (typeof window !== 'undefined') {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		}
+	}
 </script>
 
 <div>
@@ -92,12 +93,13 @@
 			<div class="flex justify-end gap-20">
 				<div class="relative">
 					<button class="flex gap-2" onclick={handleFilter}>
-						Sort By <span>({selectedSort})</span> <DropdownIcon />
+						Sort By <span>({selectedSort})</span>
+						<DropdownIcon />
 					</button>
 
 					{#if filterItem}
 						<ul
-							class="border-md absolute z-50 mt-2 w-[13rem] rounded-lg border border-x-white bg-black py-3 text-start text-white"
+							class="border-md absolute left-8 z-50 mt-2 w-[10rem] rounded-lg border border-x-white bg-black py-3 text-start text-white"
 						>
 							<li class=" hover:bg-blue-500 hover:text-white">
 								<button onclick={() => handleSortSelection('New to Old')}>New to Old </button>
@@ -145,7 +147,7 @@
 		<div class="flex w-1920 justify-center">
 			{#if sideSelection}
 				<div class="basis-[10%]">
-					<div class="w-full mt-10">
+					<div class="mt-10 w-full">
 						<section class="flex justify-between">
 							<h2>In-Stock</h2>
 							<button onclick={handleStock}>
@@ -169,39 +171,41 @@
 					</div>
 					<hr class="mt-3 w-[100%]" />
 
-					<div class="w-full mt-10">
-						<section class="flex justify-between">
-							<h2>Selection Anime</h2>
-							<button onclick={handleSelectANime}>
-								{#if selectAnime}
-									<ArrowUpIcon />
-								{:else}
-									<DropdownIcon />
-								{/if}
-							</button>
-						</section>
-						{#if selectAnime}
-							<section class="mt-2 flex gap-1">
-								<input type="Checkbox" />
-								<h4>One-Piece</h4>
+					{#if showSelectionAnimeBrand}
+						<div class="mt-10 w-full">
+							<section class="flex justify-between">
+								<h2>Selection Anime</h2>
+								<button onclick={handleSelectANime}>
+									{#if selectAnime}
+										<ArrowUpIcon />
+									{:else}
+										<DropdownIcon />
+									{/if}
+								</button>
 							</section>
-							<section class="flex gap-1">
-								<input type="Checkbox" />
-								<h4>Naruto</h4>
-							</section>
-							<section class="flex gap-1">
-								<input type="Checkbox" />
-								<h4>Bleach</h4>
-							</section>
-							<section class="flex gap-1">
-								<input type="Checkbox" />
-								<h4>Assorted</h4>
-							</section>
-						{/if}
-					</div>
-					<hr class="mt-3 w-[100%]" />
+							{#if selectAnime}
+								<section class="mt-2 flex gap-1">
+									<input type="Checkbox" />
+									<h4>One-Piece</h4>
+								</section>
+								<section class="flex gap-1">
+									<input type="Checkbox" />
+									<h4>Naruto</h4>
+								</section>
+								<section class="flex gap-1">
+									<input type="Checkbox" />
+									<h4>Bleach</h4>
+								</section>
+								<section class="flex gap-1">
+									<input type="Checkbox" />
+									<h4>Assorted</h4>
+								</section>
+							{/if}
+						</div>
+						<hr class="mt-3 w-[100%]" />
+					{/if}
 
-					<div class="w-full mt-10">
+					<div class="mt-10 w-full">
 						<section class="flex justify-between">
 							<h2>Price</h2>
 							<button onclick={handlePrice}>

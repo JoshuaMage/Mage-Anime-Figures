@@ -1,6 +1,5 @@
 <script>
-// @ts-nocheck
-
+	// @ts-nocheck
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { bleachFiguresAnime } from '../../Products/BLEACH/index';
@@ -16,6 +15,7 @@
 	function handleSortChanged(event) {
 		sortOption = event.detail; // Update the sort option when changed
 	}
+
 </script>
 
 <div
@@ -40,10 +40,9 @@
 		bind:itemsPerPage
 		{sortOption}
 		on:sortChanged={handleSortChanged}
+		showSelectionAnimeBrand={false}
+		
 	>
-		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} 
-		{sortOption} />
-		
-		
+		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption} />
 	</FilterSelection>
 </div>

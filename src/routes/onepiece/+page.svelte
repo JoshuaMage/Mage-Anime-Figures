@@ -1,4 +1,5 @@
 <script>
+	
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { onepieceFiguresAnime } from '../../Products/one-piece/index';
@@ -7,6 +8,8 @@
 	let gridRows = 3;
 	let itemsPerPage = 9;
 	let sortOption = 'New to Old';
+
+
 
 	/**
 	 * @param {{ detail: string; }} event
@@ -19,7 +22,7 @@
 <div
 	class="min-w-screen flex min-h-screen flex-col overflow-x-hidden bg-slate-950 text-center text-slate-50"
 >
-	<div class="py-16 mt-7">
+	<div class="mt-7 py-16">
 		<h1 class="text-6xl font-bold uppercase italic tracking-widest text-orange">One-piece</h1>
 		<p class="mt-5 text-xl tracking-wider">
 			Set sail on a grand adventure with our premium <strong class="uppercase"
@@ -36,7 +39,14 @@
 		bind:itemsPerPage
 		{sortOption}
 		on:sortChanged={handleSortChanged}
+		showSelectionAnimeBrand={false}
 	>
-		<ProductsFigures data={onepieceFiguresAnime} {itemsPerPage} {gridCols} {gridRows}  	{sortOption}/>
+		<ProductsFigures
+			data={onepieceFiguresAnime}
+			{itemsPerPage}
+			{gridCols}
+			{gridRows}
+			{sortOption}
+		/>
 	</FilterSelection>
 </div>

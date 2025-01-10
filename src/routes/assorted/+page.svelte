@@ -1,7 +1,9 @@
 <script>
+
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { newFiguresAnime } from '../../Products/new/newProduct';
+
 
 	let gridCols = 3;
 	let gridRows = 3;
@@ -9,6 +11,7 @@
 
 	let sortOption = 'New to Old';
 
+	
 /**
  * @param {{ detail: string; }} event
  */

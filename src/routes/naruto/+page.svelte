@@ -1,4 +1,5 @@
 <script>
+
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { narutoFiguresAnime } from '../../Products/naruto/index';
@@ -13,7 +14,7 @@
  * @param {{ detail: string; }} event
  */
 function handleSortChanged(event) {
-	sortOption = event.detail; // Update the sort option when changed
+	sortOption = event.detail; 
 }
 </script>
 
@@ -37,6 +38,7 @@ function handleSortChanged(event) {
 	bind:itemsPerPage
 	{sortOption}
 	on:sortChanged={handleSortChanged}
+	showSelectionAnimeBrand={false}
 >
 	
 		<ProductsFigures data={narutoFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption} />
