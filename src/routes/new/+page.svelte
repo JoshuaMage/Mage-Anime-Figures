@@ -1,5 +1,4 @@
 <script>
-	import { allPageData } from '$lib/store';
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { newFiguresAnime } from '../../Products/new/newProduct';
@@ -7,14 +6,11 @@
 	let gridCols = 3;
 	let gridRows = 3;
 	let itemsPerPage = 9;
-
 	let sortOption = 'New to Old';
 
-	allPageData.update((data) => ({
-    ...data,
-    // @ts-ignore
-    newData: index4, // store data for page 1
-  }));
+	//counting product per availabilty
+	let availableCount = 0;
+	let preOrderCount = 0;
 
 	/**
 	 * @param {{ detail: string; }} event
@@ -22,6 +18,21 @@
 	function handleSortChanged(event) {
 		sortOption = event.detail; // Update the sort option when changed
 	}
+
+	//counting product per availabilty
+	function calculateCounts() {
+		availableCount = 0;
+		preOrderCount = 0;
+
+		Object.values(newFiguresAnime[0]).forEach((item) => {
+			if (item.availability === 'Available') {
+				availableCount++;
+			} else if (item.availability === 'Pre-Order') {
+				preOrderCount++;
+			}
+		});
+	}
+	calculateCounts();
 </script>
 
 <div
@@ -41,6 +52,8 @@
 		bind:itemsPerPage
 		{sortOption}
 		on:sortChanged={handleSortChanged}
+		{availableCount}
+		{preOrderCount}
 	>
 		<ProductsFigures data={newFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption} />
 	</FilterSelection>

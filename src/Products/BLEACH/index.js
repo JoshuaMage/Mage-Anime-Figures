@@ -213,14 +213,7 @@ export const bleachFiguresAnime =  [ {
         price: 18,
         currentIndex: 0
     },
-    uryu: {
-        id: 15,
-        image: [uryu1, uryu2, uryu3, uryu4],
-        availability: 'Available',
-        description: 'Banpresto BLEACH Solid and Souls Ichigo Kurosaki & Uryu Ishida (B:URYU ISHIDA)',
-        price: 18,
-        currentIndex: 0
-    },
+  
     cifer: {
         id: 16,
         image: [cifer1, cifer2, cifer3, cifer4],
@@ -267,6 +260,14 @@ export const bleachFiguresAnime =  [ {
         availability: 'Available',
         description: 'Megahouse GALS series BLEACH Orihime Inoue BLEACH：Thousand-Year Blood War',
         price: 176,
+        currentIndex: 0
+    },
+    uryu: {
+        id: 23,
+        image: [uryu1, uryu2, uryu3, uryu4],
+        availability: 'Available',
+        description: 'Banpresto BLEACH Solid and Souls Ichigo Kurosaki & Uryu Ishida (B:URYU ISHIDA)',
+        price: 18,
         currentIndex: 0
     },
 

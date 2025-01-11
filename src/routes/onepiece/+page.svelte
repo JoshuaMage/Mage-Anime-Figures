@@ -1,5 +1,4 @@
 <script>
-	
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { onepieceFiguresAnime } from '../../Products/one-piece/index';
@@ -9,7 +8,9 @@
 	let itemsPerPage = 9;
 	let sortOption = 'New to Old';
 
-
+	//counting product per availabilty
+	let availableCount = 0;
+	let preOrderCount = 0;
 
 	/**
 	 * @param {{ detail: string; }} event
@@ -17,6 +18,21 @@
 	function handleSortChanged(event) {
 		sortOption = event.detail; // Update the sort option when changed
 	}
+
+	//counting product per availabilty
+	function calculateCounts() {
+		availableCount = 0;
+		preOrderCount = 0;
+
+		Object.values(onepieceFiguresAnime[0]).forEach((item) => {
+			if (item.availability === 'Available') {
+				availableCount++;
+			} else if (item.availability === 'Pre-Order') {
+				preOrderCount++;
+			}
+		});
+	}
+	calculateCounts();
 </script>
 
 <div
@@ -40,6 +56,8 @@
 		{sortOption}
 		on:sortChanged={handleSortChanged}
 		showSelectionAnimeBrand={false}
+		{availableCount}
+		{preOrderCount}
 	>
 		<ProductsFigures
 			data={onepieceFiguresAnime}

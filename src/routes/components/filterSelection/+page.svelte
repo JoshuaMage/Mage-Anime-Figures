@@ -5,7 +5,6 @@
 	import FilterSizeImage3 from '../../../svg/filterSizeImage3.svelte';
 	import FilterSizeImage4 from '../../../svg/filterSizeImage4.svelte';
 	import ArrowUpIcon from '../../../svg/arrowUpIcon.svelte';
-	import { writable } from 'svelte/store';
 
 	export let gridCols = 3;
 	export let gridRows = 3;
@@ -14,6 +13,10 @@
 	export let sortOption = '';
 	export let currentPage = 0;
 	export let showSelectionAnimeBrand = true;
+
+	//count the Product per availability
+	export let availableCount = 0;
+	export let preOrderCount = 0;
 
 	const dispatch = createEventDispatcher();
 	let filterItem = false;
@@ -26,7 +29,9 @@
 	//store for input sorting
 
 	function handleFilter() {
-		filterItem = !filterItem;
+		setTimeout(() => {
+			filterItem = !filterItem;
+		}, 200);
 	}
 
 	function handleSelection() {
@@ -80,8 +85,8 @@
 </script>
 
 <div>
-	<div class="flex content-center items-center justify-center gap-10">
-		<div class="mx-10 flex w-1920 justify-between">
+	<div class=" flex content-center items-center justify-center gap-10">
+		<div class="mx-14 flex w-[120rem] justify-between">
 			<div class="flex gap-20">
 				<button class="flex gap-2" onclick={handleSelection}
 					>Hide Filters
@@ -143,8 +148,8 @@
 		</div>
 	</div>
 
-	<div class="mx-2 flex content-center items-center justify-center">
-		<div class="flex w-1920 justify-center">
+	<div class="mx-14 flex content-center items-center justify-center">
+		<div class="flex w-[120rem] justify-center">
 			{#if sideSelection}
 				<div class="basis-[10%]">
 					<div class="mt-10 w-full">
@@ -162,10 +167,12 @@
 							<section class="mt-3 flex gap-1 delay-1000">
 								<input type="Checkbox" />
 								<h4>Pre-Order</h4>
+								<p>({preOrderCount})</p>
 							</section>
 							<section class="flex gap-1 delay-1000">
 								<input type="Checkbox" />
-								<h4>Shipping Now</h4>
+								<h4>Available</h4>
+								<p>({availableCount})</p>
 							</section>
 						{/if}
 					</div>
@@ -218,23 +225,24 @@
 						</section>
 						{#if selectPrice}
 							<section class="flex gap-1">
-								<input type="Checkbox" />
+								<input type="checkbox" />
+
 								<h4>$0 - $25</h4>
 							</section>
 							<section class="flex gap-1">
-								<input type="Checkbox" />
+								<input type="checkbox" />
 								<h4>$25 - $50</h4>
 							</section>
 							<section class="flex gap-1">
-								<input type="Checkbox" />
+								<input type="checkbox" />
 								<h4>$50 - $75</h4>
 							</section>
 							<section class="flex gap-1">
-								<input type="Checkbox" />
+								<input type="checkbox" />
 								<h4>$75 - $100</h4>
 							</section>
 							<section class="flex gap-1">
-								<input type="Checkbox" />
+								<input type="checkbox" />
 								<h4>$100+</h4>
 							</section>
 						{/if}

@@ -6,7 +6,7 @@
 
 </script>
 
-	<main class="min-w-screen min-h-screen overflow-x-hidden bg-slate-950 text-slate-50 ">
+	<main class=" min-w-screen min-h-screen overflow-x-hidden bg-slate-950 text-slate-50 ">
 		<div class="flex flex-col content-center justify-center text-center ">
 			<div class="flex h-[650px] w-screen items-center justify-center overflow-hidden">
 				<div>
@@ -60,7 +60,7 @@
 			</div>
 
 			<div class="flex content-center justify-center">
-				<div class="w-1920 mb-5 bg-blue-950 py-20">
+				<div class="w-[120rem] mb-5 bg-blue-950 py-20">
 					<h2 class="text-orange my-3 text-5xl font-bold italic tracking-widest">
 						MAGE <span class="font-semibold">PREMIUM</span>
 					</h2>

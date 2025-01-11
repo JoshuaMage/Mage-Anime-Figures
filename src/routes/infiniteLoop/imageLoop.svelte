@@ -1,6 +1,6 @@
 <div >
   <div
-    class="flex justify-center content-center overflow-hidden whitespace-nowrap gap-5 mt-10 w-1920"
+    class="flex justify-center content-center overflow-hidden whitespace-nowrap gap-5 mt-10 w-[120rem]"
   >
     <div class="shrink-0 h-48 animate-scroll">
       <img

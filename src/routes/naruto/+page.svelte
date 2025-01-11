@@ -1,5 +1,4 @@
 <script>
-
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { narutoFiguresAnime } from '../../Products/naruto/index';
@@ -7,15 +6,33 @@
 	let gridCols = 3;
 	let gridRows = 3;
 	let itemsPerPage = 9;
-
 	let sortOption = 'New to Old';
 
-/**
- * @param {{ detail: string; }} event
- */
-function handleSortChanged(event) {
-	sortOption = event.detail; 
-}
+	//counting product per availabilty
+	let availableCount = 0;
+	let preOrderCount = 0;
+
+	/**
+	 * @param {{ detail: string; }} event
+	 */
+	function handleSortChanged(event) {
+		sortOption = event.detail;
+	}
+
+	//counting product per availabilty
+	function calculateCounts() {
+		availableCount = 0;
+		preOrderCount = 0;
+
+		Object.values(narutoFiguresAnime[0]).forEach((item) => {
+			if (item.availability === 'Available') {
+				availableCount++;
+			} else if (item.availability === 'Pre-Order') {
+				preOrderCount++;
+			}
+		});
+	}
+	calculateCounts();
 </script>
 
 <div
@@ -33,14 +50,15 @@ function handleSortChanged(event) {
 		</p>
 	</div>
 	<FilterSelection
-	bind:gridCols
-	bind:gridRows
-	bind:itemsPerPage
-	{sortOption}
-	on:sortChanged={handleSortChanged}
-	showSelectionAnimeBrand={false}
->
-	
+		bind:gridCols
+		bind:gridRows
+		bind:itemsPerPage
+		{sortOption}
+		on:sortChanged={handleSortChanged}
+		showSelectionAnimeBrand={false}
+		{availableCount}
+		{preOrderCount}
+	>
 		<ProductsFigures data={narutoFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption} />
 	</FilterSelection>
 </div>
