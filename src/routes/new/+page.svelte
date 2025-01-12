@@ -12,6 +12,13 @@
 	let availableCount = 0;
 	let preOrderCount = 0;
 
+	//counting priceRange per price
+	let countPriceRange1 = 0; // $0 - $25
+	let countPriceRange2 = 0; // $25 - $50
+	let countPriceRange3 = 0; // $50 - $75
+	let countPriceRange4 = 0; // $75 - $100
+	let countPriceRange5 = 0; // $100+
+
 	/**
 	 * @param {{ detail: string; }} event
 	 */
@@ -23,6 +30,11 @@
 	function calculateCounts() {
 		availableCount = 0;
 		preOrderCount = 0;
+		countPriceRange1 = 0;
+		countPriceRange2 = 0;
+		countPriceRange3 = 0;
+		countPriceRange4 = 0;
+		countPriceRange5 = 0;
 
 		Object.values(newFiguresAnime[0]).forEach((item) => {
 			if (item.availability === 'Available') {
@@ -30,17 +42,30 @@
 			} else if (item.availability === 'Pre-Order') {
 				preOrderCount++;
 			}
+
+			if (item.price <= 25) {
+				countPriceRange1++;
+			} else if (item.price <= 50) {
+				countPriceRange2++;
+			} else if (item.price <= 75) {
+				countPriceRange3++;
+			} else if (item.price <= 100) {
+				countPriceRange4++;
+			} else {
+				countPriceRange5++;
+			}
 		});
 	}
+
 	calculateCounts();
 </script>
 
 <div
 	class="min-w-screen flex min-h-screen flex-col overflow-x-hidden bg-slate-950 text-center text-slate-50"
 >
-	<div class="mt-7 py-16">
-		<h1 class="text-6xl font-bold italic tracking-widest text-orange">NEW</h1>
-		<p class="mt-5 text-xl tracking-wider">
+	<div class="pb-10 mx-1">
+		<h1 class="sm:text-2xl md:text-6xl font-bold italic tracking-widest uppercase text-orange">NEW</h1>
+		<p class="sm:mt-2 md:mt-5 sm:text-[10px] md:text-xl tracking-wider">
 			Shop <strong>NEW</strong> arrivals from your favorite anime brands including, BlueLock, <br />
 			Bleach, OnePiece, Naruto and other incoming New anime!
 			<strong> Mage Premium Member </strong>get EARLY ACCESS to select new Product drops
@@ -54,6 +79,11 @@
 		on:sortChanged={handleSortChanged}
 		{availableCount}
 		{preOrderCount}
+		{countPriceRange1}
+		{countPriceRange2}
+		{countPriceRange3}
+		{countPriceRange4}
+		{countPriceRange5}
 	>
 		<ProductsFigures data={newFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption} />
 	</FilterSelection>

@@ -1,5 +1,7 @@
-import { writable } from "svelte/store";
+// store.js
+import { writable } from 'svelte/store';
 
-// No need for type annotations in JavaScript
-export const selectedPriceRange = writable([]);
-export const filteredProducts = writable([]);
+export const sortOption = writable('New to Old');
+export const gridCols = writable(3);
+export const gridRows = writable(3);
+export const itemsPerPage = writable(9);

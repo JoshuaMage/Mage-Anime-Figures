@@ -1,57 +1,60 @@
-<div class=" flex container bg-white text-black  py-10">
-  <div class="grid grid-cols-4 w-1920">
-    <section class="font-semibold">
-      <h2 class="text-2xl font-bold py-3 hover:underline hover:italic">
+<div class=" flex container bg-white text-black sm:px-1 md:py-10">
+  <div class="grid grid-cols-4 sm:gap-1">
+    <section class="md:font-semibold ">
+      <h2 class="sm:text-[13px] md:text-2xl  font-bold py-3 hover:underline hover:italic">
         Contact US
       </h2>
-      <h4 class="py-1 hover:underline">Contact Us</h4>
-      <h4 class="py-1 hover:underline">FAQ</h4>
-      <h4 class="py-1 hover:underline">Shipping/Returns</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Contact Us</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">FAQ</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline ">Shipping/Returns</h4>
     </section>
 
-    <section class="font-semibold">
-      <h2 class="text-2xl font-bold py-3 hover:underline hover:italic">
+    <section class="md:font-semibold ">
+      <h2 class="sm:text-[13px] md:text-2xl font-bold py-3 hover:underline hover:italic">
         Quick Links
       </h2>
-      <h4 class="py-1 hover:underline">Privacy Policy</h4>
-      <h4 class="py-1 hover:underline">Term of Use</h4>
-      <h4 class="py-1 hover:underline">
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Privacy Policy</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Term of Use</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">
         State Specific Disclosures and Rights
       </h4>
-      <h4 class="py-1 hover:underline">
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">
         Do not sell or Share my Personal Information
       </h4>
-      <h4 class="py-1 hover:underline">Data Subject Rights</h4>
-      <h4 class="py-1 hover:underline">Help</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Data Subject Rights</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Help</h4>
     </section>
 
-    <section class="font-semibold">
-      <h2 class="text-2xl font-bold py-3 hover:underline hover:italic">
+    <section class="md:font-semibold ">
+      <h2 class="sm:text-[13px] md:text-2xl font-bold py-3 hover:underline hover:italic">
         About Us
       </h2>
-      <h4 class="py-1 hover:underline">Who We Are</h4>
-      <h4 class="py-1 hover:underline">Corporate</h4>
-      <h4 class="py-1 hover:underline">Mage Premium</h4>
-      <h4 class="py-1 hover:underline">Accessibility Statement</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Who We Are</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Corporate</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Mage Premium</h4>
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">Accessibility Statement</h4>
     </section>
 
-    <section class="font-semibold">
-      <h2 class="text-2xl font-bold py-3 hover:underline hover:italic">
+    <section class="md:font-semibold ">
+      <h2 class="sm:text-[13px] md:text-2xl font-bold py-3 hover:underline hover:italic">
         Where Fans Come First
       </h2>
-      <h4 class="py-1 hover:underline">
+      <h4 class="py-1 sm:text-[10px] md:text-[14px] hover:underline">
         hot new Release Anime Figure is Available on our Website
       </h4>
       <input
         type="text"
         placeholder="Email Address"
-        class="border-2 border-black px-5 py-1 my-2 rounded-md"
+        class="border-2 border-black sm:px-1 md:px-5 py-1 my-2 rounded-md sm:text-[10px] md:text-md sm:w-24 md:w-full "
       />
 
-      <section class="flex justify-center gap-6 mt-2">
+      <section class="flex justify-center sm:gap-1 md:gap-6 mt-2">
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <!-- svelte-ignore a11y_invalid_attribute -->
+        <!-- svelte-ignore a11y_invalid_attribute -->
         <a
           href=""
-          class="transform transition-transform duration-300 hover:rotate-180"
+          class="transform transition-transform duration-300 hover:rotate-180 "
           ><svg
             height="30px"
             width="30px"
@@ -62,6 +65,7 @@
             viewBox="0 0 551.034 551.034"
             xml:space="preserve"
             fill="#000000"
+            class='sm:w-6 lg:w-8'
             ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
               id="SVGRepo_tracerCarrier"
               stroke-linecap="round"
@@ -132,6 +136,8 @@
           ></a
         >
 
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <!-- svelte-ignore a11y_consider_explicit_label -->
         <a
           href=""
           class="transform transition-transform duration-300 hover:rotate-180"
@@ -145,10 +151,12 @@
             viewBox="0 0 408.788 408.788"
             xml:space="preserve"
             fill="#000000"
+              class='sm:w-6 lg:w-8'
             ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
               id="SVGRepo_tracerCarrier"
               stroke-linecap="round"
               stroke-linejoin="round"
+              
             ></g><g id="SVGRepo_iconCarrier">
               <path
                 style="fill:#475993;"
@@ -171,6 +179,7 @@
             viewBox="0 0 461.001 461.001"
             xml:space="preserve"
             fill="#000000"
+              class='sm:w-6 lg:w-8'
             ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
               id="SVGRepo_tracerCarrier"
               stroke-linecap="round"
@@ -198,6 +207,7 @@
             viewBox="0 0 410.155 410.155"
             xml:space="preserve"
             fill="#000000"
+              class='sm:w-6 lg:w-8'
             ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
               id="SVGRepo_tracerCarrier"
               stroke-linecap="round"

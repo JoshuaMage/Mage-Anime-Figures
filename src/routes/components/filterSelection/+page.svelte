@@ -17,6 +17,11 @@
 	//count the Product per availability
 	export let availableCount = 0;
 	export let preOrderCount = 0;
+	export let countPriceRange1 = 0;
+	export let countPriceRange2 = 0;
+	export let countPriceRange3 = 0;
+	export let countPriceRange4 = 0;
+	export let countPriceRange5 = 0;
 
 	const dispatch = createEventDispatcher();
 	let filterItem = false;
@@ -85,26 +90,26 @@
 </script>
 
 <div>
-	<div class=" flex content-center items-center justify-center gap-10">
-		<div class="mx-14 flex w-[120rem] justify-between">
-			<div class="flex gap-20">
-				<button class="flex gap-2" onclick={handleSelection}
+	<div class="sm:text-[13px] md:text-lg flex content-center items-center justify-center gap-5">
+		<div class="md:mx-14 flex md:w-[120rem] md:justify-between sm:gap-10 md:gap-0">
+			<div class="flex md:gap-20 sm:gap-3">
+				<button class="flex sm:text-[12px] lg:text-lg md:gap-2" onclick={handleSelection}
 					>Hide Filters
-					<FilterIcon />
+					<span class="sm:hidden md:block"><FilterIcon  /></span>
 				</button>
-				<h2 class="flex justify-start">Number of items filter</h2>
+				<h2 class="sm:text-[12px] lg:text-lg">(count)</h2>
 			</div>
 
-			<div class="flex justify-end gap-20">
-				<div class="relative">
-					<button class="flex gap-2" onclick={handleFilter}>
+			<div class="flex justify-end sm:gap-5 md:gap-20">
+				<div class="relative sm:pl-10 md:pl-0">
+					<button class="flex sm:gap-1 md:gap-2 sm:text-[12px] lg:text-lg" onclick={handleFilter}>
 						Sort By <span>({selectedSort})</span>
-						<DropdownIcon />
+						<span class="sm:hidden md:block"><DropdownIcon /></span>
 					</button>
 
 					{#if filterItem}
 						<ul
-							class="border-md absolute left-8 z-50 mt-2 w-[10rem] rounded-lg border border-x-white bg-black py-3 text-start text-white"
+							class="border-md absolute left-8 z-50 mt-2 sm:w-28 md:w-[10rem] rounded-lg border border-x-white bg-black py-3 text-start text-white sm:text-xs md:text-[17px] md:leading-7"
 						>
 							<li class=" hover:bg-blue-500 hover:text-white">
 								<button onclick={() => handleSortSelection('New to Old')}>New to Old </button>
@@ -148,13 +153,13 @@
 		</div>
 	</div>
 
-	<div class="mx-14 flex content-center items-center justify-center">
+	<div class="sm:mx-1 md:mx-14 flex content-center items-center justify-center sm:text-[12px] lg:text-lg">
 		<div class="flex w-[120rem] justify-center">
 			{#if sideSelection}
 				<div class="basis-[10%]">
-					<div class="mt-10 w-full">
+					<div class="mt-10 w-full sm:text-[11px] md:text-xl ">
 						<section class="flex justify-between">
-							<h2>In-Stock</h2>
+							<h2 >In-Stock</h2>
 							<button onclick={handleStock}>
 								{#if inStock}
 									<ArrowUpIcon />
@@ -164,15 +169,15 @@
 							</button>
 						</section>
 						{#if inStock}
-							<section class="mt-3 flex gap-1 delay-1000">
+							<section class="mt-3 flex md:gap-1 delay-1000 ">
 								<input type="Checkbox" />
-								<h4>Pre-Order</h4>
-								<p>({preOrderCount})</p>
+								<h4 class="sm:text-[10px] lg:text-lg">Pre-Order</h4>
+								<p class="sm:text-[10px] lg:text-lg">({preOrderCount})</p>
 							</section>
 							<section class="flex gap-1 delay-1000">
 								<input type="Checkbox" />
-								<h4>Available</h4>
-								<p>({availableCount})</p>
+								<h4 class="sm:text-[10px] lg:text-lg">Available</h4>
+								<p class="sm:text-[10px] lg:text-lg">({availableCount})</p>
 							</section>
 						{/if}
 					</div>
@@ -180,8 +185,8 @@
 
 					{#if showSelectionAnimeBrand}
 						<div class="mt-10 w-full">
-							<section class="flex justify-between">
-								<h2>Selection Anime</h2>
+							<section class="flex justify-between ">
+								<h2 class="sm:text-[11px] md:text-xl">Selection Anime</h2>
 								<button onclick={handleSelectANime}>
 									{#if selectAnime}
 										<ArrowUpIcon />
@@ -214,7 +219,7 @@
 
 					<div class="mt-10 w-full">
 						<section class="flex justify-between">
-							<h2>Price</h2>
+							<h2 class="sm:text-[11px] md:text-xl">Price</h2>
 							<button onclick={handlePrice}>
 								{#if selectPrice}
 									<ArrowUpIcon />
@@ -224,26 +229,30 @@
 							</button>
 						</section>
 						{#if selectPrice}
-							<section class="flex gap-1">
+							<section class="flex md:gap-1  items-center">
 								<input type="checkbox" />
-
-								<h4>$0 - $25</h4>
+								<h4 class="sm:text-[10px] lg:text-lg">$0 - $25</h4>
+								<p class="px-1">({countPriceRange1})</p>
 							</section>
-							<section class="flex gap-1">
+							<section class="flex md:gap-1  items-center">
 								<input type="checkbox" />
-								<h4>$25 - $50</h4>
+								<h4 class="sm:text-[10px] lg:text-lg">$25 - $50</h4>
+								<p class="px-1">({countPriceRange2})</p>
 							</section>
-							<section class="flex gap-1">
+							<section class="flex md:gap-1  items-center">
 								<input type="checkbox" />
-								<h4>$50 - $75</h4>
+								<h4 class="sm:text-[10px] lg:text-lg">$50 - $75</h4>
+								<p class="px-1">({countPriceRange3})</p>
 							</section>
-							<section class="flex gap-1">
+							<section class="flex md:gap-1  items-center">
 								<input type="checkbox" />
-								<h4>$75 - $100</h4>
+								<h4 class="sm:text-[10px] lg:text-lg">$75 - $100</h4>
+								<p class="px-1">({countPriceRange4})</p>
 							</section>
-							<section class="flex gap-1">
+							<section class="flex md:gap-1  items-center">
 								<input type="checkbox" />
-								<h4>$100+</h4>
+								<h4 class="sm:text-[10px] lg:text-lg" >$100+</h4>
+								<p class="px-1">({countPriceRange5})</p>
 							</section>
 						{/if}
 					</div>
@@ -251,7 +260,7 @@
 				</div>
 			{/if}
 
-			<div class="basis-[90%]">
+			<div class="md:basis-[90%]">
 				<slot></slot>
 			</div>
 		</div>

@@ -1,12 +1,11 @@
 <div class="border border-white rounded hover:bg-black">
 	<svg
-		width="40px"
-		height="40px"
 		viewBox="0 0 24 24"
 		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		fill="#FFFFFF"
+		class="sm:w-6 md:w-10"
 		><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
 			id="SVGRepo_tracerCarrier"
 			stroke-linecap="round"

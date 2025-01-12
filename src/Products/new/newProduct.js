@@ -115,7 +115,7 @@ export const newFiguresAnime = [ {
     rin: {
         id: 2,
         image: [rin1, rin2, rin3, rin4],
-        availability: 'Sold-Out',
+        availability: 'Available',
         description: 'Itoshi Rin - BLUELOCK - EXTRA SLOT',
         price: 10,
         currentIndex: 0

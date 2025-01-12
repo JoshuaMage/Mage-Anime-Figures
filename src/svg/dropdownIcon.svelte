@@ -1,9 +1,9 @@
 <svg
-width="30px"
-height="30px"
+
 viewBox="0 0 15 15"
 fill="none"
 xmlns="http://www.w3.org/2000/svg"
+class='sm:w-4 md:w-8'
 ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
     id="SVGRepo_tracerCarrier"
     stroke-linecap="round"

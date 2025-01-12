@@ -231,7 +231,7 @@ export const bleachFiguresAnime =  [ {
         currentIndex: 0
     },
     niihashi: {
-        id: 19,
+        id: 18,
         image: [niihashi1, niihashi2, niihashi3, niihashi4],
         availability: 'Available',
         description: 'FREEing BURN THE WITCH 1/4 Noel Niihashi: Swimsuit Ver',
@@ -239,7 +239,7 @@ export const bleachFiguresAnime =  [ {
         currentIndex: 0
     },
     ninny: {
-        id: 20,
+        id: 19,
         image: [ninny1, ninny2, ninny3, ninny4],
         availability: 'Available',
         description: 'FREEing BURN THE WITCH 1/4 Ninny Spangcole: Swimsuit Ver',
@@ -247,7 +247,7 @@ export const bleachFiguresAnime =  [ {
         currentIndex: 0
     },
     rangiku: {
-        id: 21,
+        id: 20,
         image: [rangiku1, rangiku2, rangiku3, rangiku4],
         availability: 'Available',
         description: 'Megahouse BLEACH B-style 1/4 Rangiku Matsumoto Swimsuit Ver.',
@@ -255,7 +255,7 @@ export const bleachFiguresAnime =  [ {
         currentIndex: 0
     },
     orihime: {
-        id: 22,
+        id: 21,
         image: [orihime1, orihime2, orihime3, orihime4],
         availability: 'Available',
         description: 'Megahouse GALS series BLEACH Orihime Inoue BLEACH：Thousand-Year Blood War',
@@ -263,7 +263,7 @@ export const bleachFiguresAnime =  [ {
         currentIndex: 0
     },
     uryu: {
-        id: 23,
+        id: 22,
         image: [uryu1, uryu2, uryu3, uryu4],
         availability: 'Available',
         description: 'Banpresto BLEACH Solid and Souls Ichigo Kurosaki & Uryu Ishida (B:URYU ISHIDA)',

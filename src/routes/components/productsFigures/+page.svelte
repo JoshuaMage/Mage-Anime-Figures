@@ -22,6 +22,8 @@
 		const storedIndexes = localStorage.getItem('currentIndexes');
 		if (storedIndexes) {
 			currentIndexes = JSON.parse(storedIndexes);
+		} else {
+			currentIndexes = {};
 		}
 	}
 
@@ -148,56 +150,54 @@
 	}
 
 	$: sortedData = getSortedData(data, sortOption);
-
-	$: gridClass = `grid-cols-${gridCols} grid-rows-${gridRows}`;
 </script>
 
-<div class="grid h-full grid-rows-[90%_10%]">
-	<div class={`my-5 grid ${gridClass} p-5`}>
+<div class="mx-auto sm:flex sm:flex-col md:grid md:grid-rows-[90%_10%]">
+	<div class={`grid md:my-5 grid-cols-${gridCols} grid-rows-${gridRows} md:p-5 `}>
 		{#each displayedData as [name, item]}
-			<div class="mb-5 mr-8 grid grid-rows-[35rem] rounded-2xl bg-black">
+			<div class="md:mb-5 grid rounded-2xl bg-black md:mr-8 md:grid-rows-[35rem] ">
 				<div class="relative m-auto mt-4 h-full w-full pb-3">
 					<img
 						src={item.image[currentIndexes[name]]}
 						alt={`${name} image ${currentIndexes[name] + 1}`}
-						class={`h-full w-full rounded-xl object-fill px-2 ${fadingImage === name ? 'animate-fade' : ''}`}
+						class={`rounded-xl object-fill px-2 sm:h-32 md:h-full w-full ${fadingImage === name ? 'animate-fade' : ''}`}
 						loading="lazy"
 					/>
 					<button
 						onclick={() => showPreviousImage(name)}
-						class="absolute bottom-[50%] right-[90%] rounded-full"><LeftiCon /></button
+						class="absolute bottom-[50%] sm:right-[70%] md:right-[90%] rounded-full"><LeftiCon /></button
 					>
-					<button onclick={() => showNextImage(name)} class="absolute bottom-[50%] left-[90%]"
+					<button onclick={() => showNextImage(name)} class="absolute bottom-[50%] sm:left-[70%] md:left-[90%]"
 						><RightIcon /></button
 					>
 				</div>
 
-				<div class="relative flex items-center justify-center bg-transparent">
-					<div>
-						<h6 class="text-start text-xs">
+				<div class="relative flex justify-between md:items-center md:justify-center bg-transparent  md:px-2">
+					<div class="grow sm:px-2 md:px-0">
+						<h6 class="text-start sm:text-[7px]  md:text-xs">
 							<span
-								class={`${ item.availability === 'Available' ? 'text-green-400' : 'text-red-400'} text-5xl`}
+								class={`${item.availability === 'Available' ? 'text-green-400' : 'text-red-400'} sm:text-[15px] md:text-5xl`}
 							>
 								.
 							</span>
 							{item.availability}
 						</h6>
-						<p class="break-words pr-14 text-start text-xl font-bold italic">{item.description}</p>
-						<h2 class="ita mt-2 text-start text-xl font-bold">${item.price}</h2>
+						<p class="break-words pr-14 text-start text-xl font-bold italic sm:hidden md:block">
+							{item.description}
+						</p>
+						<h2 class="italic md:mt-2 text-start font-bold sm:text-[8px] md:text-xl">${item.price}</h2>
 					</div>
 
-					<div>
+					<div class="px-2">
 						<!-- svelte-ignore a11y_consider_explicit_label -->
-						<button class="rounded-full bg-blue-900 px-2 py-2 text-white hover:bg-white">
+						<button class="rounded-full bg-blue-900 text-white hover:bg-white sm:p-1 md:p-2">
 							<svg
 								fill="#000000"
-								width="25px"
-								height="25px"
 								viewBox="0 0 24 24"
 								id="cart-alt-1"
 								data-name="Flat Line"
 								xmlns="http://www.w3.org/2000/svg"
-								class="icon flat-line"
+								class="icon flat-line 4 sm:w-4 md:w-7"
 							>
 								<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
 								<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -232,9 +232,9 @@
 		{/each}
 	</div>
 
-	<div class="my-3 flex h-[10rem] content-center justify-center text-center">
+	<div class="my-3 flex md:h-[10rem] content-center justify-center text-center">
 		<button onclick={previousPage} disabled={currentPage === 0}><PaginationLeft /></button>
-		<p class="mx-10 content-center text-lg">Page {currentPage + 1} of {totalPages}</p>
+		<p class="mx-10 content-center ms:text-lg">Page {currentPage + 1} of {totalPages}</p>
 		<button onclick={nextPage} disabled={currentPage === totalPages - 1}><PaginationRight /></button
 		>
 	</div>

@@ -6,6 +6,9 @@ const config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
   safelist: ["dark"],
   theme: {
+    screens: {
+
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -13,7 +16,24 @@ const config = {
         "2xl": "1290px"
       }
     },
+  
     extend: {
+      screens: {
+      'sm': '414px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl': '1536px',
+      // => @media (min-width: 1536px) { ... }
+    },
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input) / <alpha-value>)",
@@ -64,7 +84,7 @@ const config = {
         '500': '550px'
       },
       width: {
-        '1920': '1920px'
+        'desktop': '1920px'
       },
       keyframes: {
         fade: {
