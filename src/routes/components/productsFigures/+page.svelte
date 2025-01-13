@@ -1,6 +1,5 @@
 <script>
 	// @ts-nocheck
-
 	import LeftiCon from '../../../svg/leftiCon.svelte';
 	import RightIcon from '../../../svg/rightIcon.svelte';
 	import PaginationLeft from '../../../svg/paginationLeft.svelte';
@@ -17,7 +16,7 @@
 	let currentPage = 0;
 	let sortedData = [...data];
 
-	// Load currentIndexes from local storage if available
+	
 	if (typeof window !== 'undefined') {
 		const storedIndexes = localStorage.getItem('currentIndexes');
 		if (storedIndexes) {
@@ -30,14 +29,14 @@
 	$: totalPages = Math.ceil(sortedData.length / itemsPerPage);
 	$: displayedData = sortedData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
-	// Initialize currentIndexes for each item if not already set
+
 	Object.keys(data[0] || {}).forEach((name) => {
 		if (currentIndexes[name] === undefined) {
 			currentIndexes[name] = 0;
 		}
 	});
 
-	// Save currentIndexes to local storage whenever it changes
+	// Save currentIndexes to local storage
 	$: if (typeof window !== 'undefined') {
 		localStorage.setItem('currentIndexes', JSON.stringify(currentIndexes));
 	}

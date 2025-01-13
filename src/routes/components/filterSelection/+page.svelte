@@ -1,10 +1,12 @@
 <script>
+
 	import { createEventDispatcher } from 'svelte';
 	import FilterIcon from '../../../svg/filterIcon.svelte';
 	import DropdownIcon from '../../../svg/dropdownIcon.svelte';
 	import FilterSizeImage3 from '../../../svg/filterSizeImage3.svelte';
 	import FilterSizeImage4 from '../../../svg/filterSizeImage4.svelte';
 	import ArrowUpIcon from '../../../svg/arrowUpIcon.svelte';
+	
 
 	export let gridCols = 3;
 	export let gridRows = 3;
@@ -22,6 +24,8 @@
 	export let countPriceRange3 = 0;
 	export let countPriceRange4 = 0;
 	export let countPriceRange5 = 0;
+
+	
 
 	const dispatch = createEventDispatcher();
 	let filterItem = false;
@@ -87,6 +91,8 @@
 			});
 		}
 	}
+
+
 </script>
 
 <div>
