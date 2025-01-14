@@ -34,6 +34,7 @@
 	let selectPrice = true;
 	let sideSelection = true;
 	let selectedSort = 'New to Old';
+	let isFilterIconClicked = false;
 
 	//store for input sorting
 
@@ -44,8 +45,10 @@
 	}
 
 	function handleSelection() {
-		sideSelection = !sideSelection;
-	}
+    sideSelection = !sideSelection;
+    // Trigger a click on the FilterIcon component
+	isFilterIconClicked = !isFilterIconClicked;
+}
 
 	function handleStock() {
 		inStock = !inStock;
@@ -101,7 +104,7 @@
 			<div class="flex md:gap-20 sm:gap-3">
 				<button class="flex sm:text-[12px] lg:text-lg md:gap-2" onclick={handleSelection}
 					>Hide Filters
-					<span class="sm:hidden md:block"><FilterIcon  /></span>
+					<span class="sm:hidden md:block"><FilterIcon  {isFilterIconClicked} /></span>
 				</button>
 				<h2 class="sm:text-[12px] lg:text-lg">(count)</h2>
 			</div>
@@ -115,35 +118,35 @@
 
 					{#if filterItem}
 						<ul
-							class="border-md absolute left-8 z-50 mt-2 sm:w-28 md:w-[10rem] rounded-lg border border-x-white bg-black py-3 text-start text-white sm:text-xs md:text-[17px] md:leading-7"
+							class="border-md absolute left-8 z-50 mt-2 sm:w-28 md:w-[10rem] rounded-lg border border-x-white bg-black py-3 text-start text-white sm:text-xs md:text-[17px] md:leading-7 px-1  "
 						>
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('New to Old')}>New to Old </button>
 							</li>
 
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('Old to New')}>Old to New </button>
 							</li>
 
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('Recommended')}>Recommended</button>
 							</li>
 
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('Name A-Z')}>Name A-Z</button>
 							</li>
 
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('Name Z-A')}>Name Z-A</button>
 							</li>
 
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('low to high')}
 									>Price(low to high)</button
 								>
 							</li>
 
-							<li class=" hover:bg-blue-500 hover:text-white">
+							<li class=" hover:bg-white hover:text-black rounded-md">
 								<button onclick={() => handleSortSelection('high to low')}
 									>Price(Hign to Low)</button
 								>

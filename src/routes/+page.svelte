@@ -5,7 +5,7 @@
 	import ImageLoop from './infiniteLoop/imageLoop.svelte';
 </script>
 
-<main class="flex flex-col items-center justify-center bg-slate-950 text-center text-slate-50">
+<main class="flex flex-col items-center justify-center bg-slate-950 text-center text-slate-50 overflow-x-hidden">
 	<div class="content-center justify-center">
 		<img src={Naruto} alt="naruto" class=" w-desktop object-cover sm:h-[13rem] md:h-[35rem]" />
 	</div>

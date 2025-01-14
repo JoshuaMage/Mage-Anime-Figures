@@ -1,13 +1,14 @@
 <div>
 	<svg
-		
+		width="35px"
+		height="35px"
 		viewBox="0 0 32 32"
 		version="1.1"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"
 		xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
 		fill="#FFFFFF"
-		class="border-2 border-white rounded-full bg-white sm:w-5 md:w-9"
+		class="border-2 border-white rounded-full bg-white"
 		><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
 			id="SVGRepo_tracerCarrier"
 			stroke-linecap="round"

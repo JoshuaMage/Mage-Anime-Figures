@@ -1,6 +1,8 @@
+
 <script>
 	import '../app.css';
 	import Footer from './components/footer.svelte';
+
 	let { children } = $props();
 
 	let toggleArrow = $state(false);
@@ -14,7 +16,7 @@
 	}
 </script>
 
-<div class="flex w-screen flex-col overflow-hidden bg-slate-950 text-slate-50 md:m-auto md:px-2">
+<div class="flex flex-col overflow-x-hidden bg-slate-950 text-slate-50 md:m-auto md:px-2">
 	<div class=" flex content-center justify-center sm:gap-5 lg:gap-20 lg:py-2 sm:text-[10px] md:text-lg">
 		<button onclick={handleArrow} class="hover:lg:font-bold"> &#11164 </button>
 		{#if toggleArrow}
@@ -27,7 +29,7 @@
 
 	<div class="relative sm:h-[14rem] lg:h-[15rem] rounded bg-opacity-80 shadow-lg">
 		<div class="w-screen py-10">
-			<div class="items-center justify-items-center sm:flex sm:flex-col md:grid md:grid-cols-4 lg:grid lg:grid-cols-4">
+			<div class="items-center justify-items-center sm:flex sm:flex-col md:grid md:grid-cols-4 ">
 				<div>
 					<h1><a href="/" class="text-xl sm:text-[25px] lg:text-4xl lg:font-bold">Mage</a></h1>
 				</div>
@@ -66,14 +68,15 @@
 					</nav>
 				</div>
 
-				<div class="flex justify-center sm:mt-3 lg:gap-5">
+				<div class="flex justify-center sm:mt-3 md:gap-1">
 					<input
 						type="text"
 						name="searchFigure"
 						id="searchFigure"
 						class="sm:w-[30%] md:w-[50%] h-6 rounded-lg text-center text-black"
 					/>
-					<section class="flex sm:gap-5 md:gap-10 sm:ml-4 lg:ml-0">
+					<section class="flex sm:gap-5 md:gap-1 sm:ml-4 lg:ml-0">
+						
 						<a href="/signIn" class="flex gap-1 lg:font-bold">
 							<span>
 								<img
@@ -85,6 +88,7 @@
 							</span>
 							Sign In
 						</a>
+						<button class="font-bold">Log-out</button>
 						<a href="/cart">
 							<img
 								width="24"
@@ -93,7 +97,9 @@
 								alt="shopping-bag"
 							/>
 						</a>
+				
 					</section>
+				
 				</div>
 			</div>
 		</div>

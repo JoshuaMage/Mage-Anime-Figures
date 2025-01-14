@@ -1,9 +1,8 @@
 <script>
 	// @ts-nocheck
-	import LeftiCon from '../../../svg/leftiCon.svelte';
-	import RightIcon from '../../../svg/rightIcon.svelte';
 	import PaginationLeft from '../../../svg/paginationLeft.svelte';
 	import PaginationRight from '../../../svg/paginationRight.svelte';
+	import Cart from '../../../svg/cart.svelte';
 
 	export let data = [];
 	export let itemsPerPage = 9;
@@ -164,10 +163,10 @@
 					/>
 					<button
 						onclick={() => showPreviousImage(name)}
-						class="absolute bottom-[50%] sm:right-[70%] md:right-[90%] rounded-full"><LeftiCon /></button
+						class="absolute bottom-[50%] sm:right-[70%] md:right-[85%] rounded-full opacity-50 hover:opacity-100 bg-orange sm:size-5 md:size-9">&#11164;</button
 					>
-					<button onclick={() => showNextImage(name)} class="absolute bottom-[50%] sm:left-[70%] md:left-[90%]"
-						><RightIcon /></button
+					<button onclick={() => showNextImage(name)} class="absolute bottom-[50%] sm:left-[70%] md:left-[85%] opacity-50 hover:opacity-100 rounded-full bg-orange sm:size-5 md:size-9"
+						>&#11166;</button
 					>
 				</div>
 
@@ -189,41 +188,8 @@
 
 					<div class="px-2">
 						<!-- svelte-ignore a11y_consider_explicit_label -->
-						<button class="rounded-full bg-blue-900 text-white hover:bg-white sm:p-1 md:p-2">
-							<svg
-								fill="#000000"
-								viewBox="0 0 24 24"
-								id="cart-alt-1"
-								data-name="Flat Line"
-								xmlns="http://www.w3.org/2000/svg"
-								class="icon flat-line 4 sm:w-4 md:w-7"
-							>
-								<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-								<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-								<g id="SVGRepo_iconCarrier">
-									<polygon
-										id="secondary"
-										points="21 6 18.2 13 10 13 7.2 6 21 6"
-										style="fill: #2ca9bc; stroke-width: 2;"
-									></polygon>
-									<path
-										id="primary-upstroke"
-										d="M11,20.5h.1m5.9,0h.1"
-										style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"
-									></path>
-									<path
-										id="primary"
-										d="M3,3H5.32a1,1,0,0,1,.93.63L10,13,8.72,15.55A1,1,0,0,0,9.62,17H19"
-										style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"
-									></path>
-									<polyline
-										id="primary-2"
-										data-name="primary"
-										points="7.2 6 20.8 6 21 6 18.2 13 10 13"
-										style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"
-									></polyline>
-								</g>
-							</svg>
+						<button >
+						<Cart />
 						</button>
 					</div>
 				</div>
@@ -232,9 +198,9 @@
 	</div>
 
 	<div class="my-3 flex md:h-[10rem] content-center justify-center text-center">
-		<button onclick={previousPage} disabled={currentPage === 0}><PaginationLeft /></button>
+		<button onclick={previousPage} disabled={currentPage === 0} class="hover:font-black ">&#11164;</button>
 		<p class="mx-10 content-center ms:text-lg">Page {currentPage + 1} of {totalPages}</p>
-		<button onclick={nextPage} disabled={currentPage === totalPages - 1}><PaginationRight /></button
+		<button onclick={nextPage} disabled={currentPage === totalPages - 1} class="hover:font-black ">&#11166;</button
 		>
 	</div>
 </div>
