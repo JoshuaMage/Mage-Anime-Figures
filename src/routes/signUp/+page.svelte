@@ -1,14 +1,17 @@
 <script>
-	// import { auth, provider, signInWithPopup } from '$lib/firebaseConfig';
+	import {auth} from '$lib/firebaseConfig'
+	import { createUserWithEmailAndPassword } from 'firebase/auth';
 	import sakimoto from '../../image/signUpImage.gif';
 	import Facebook from '../../svg/facebook.svelte';
 	import Google from '../../svg/google.svelte';
 	import Apple from '../../svg/apple.svelte';
-	import { GoogleAuthProvider } from 'firebase/auth';
 
 	let passwordVisible = false;
-	let email = '';
 	let emailError = '';
+	let email = '';
+	let password = '';
+	let error = null;
+
 
 	function togglePasswordVisibility() {
 		passwordVisible = !passwordVisible;
@@ -22,16 +25,23 @@
 		}
 	}
 
-	// async function signInWithGoogle() {
-	// 	try {
-	// 		const result = await signInWithPopup(auth,provider);
-	// 		const credential = GoogleAuthProvider.credentialFromResult(result);
-	// 		const token = credential?.accessToken;
-	// 	} catch (error) {
-	// 		console.error('Error signin in with Google', error);
-			
-	// 	}
-	// }
+	const handleSignup = async () => {
+		// Prevent signup if email is invalid
+		if (emailError || !email || !password) {
+			return;
+		}
+
+		try {
+			// Firebase signup
+			await createUserWithEmailAndPassword(auth, email, password);
+		} catch (err) {
+			if (err instanceof Error) {
+				error = err.message;
+			} else {
+				error = 'An unknown error occurred';
+			}
+		}
+	}
 </script>
 
 <div class="relative flex min-h-screen items-center justify-center bg-slate-950">
@@ -47,23 +57,13 @@
 				<h1 class="mb-2 text-4xl font-bold">Create Account</h1>
 
 				<div class="mt-4 flex justify-center gap-5">
-					<!-- <a href="#" onclick={signInWithGoogle}><Google /></a> -->
-					<a href="/facebookSignUp"><Facebook /></a>
-					<a href="/AppleSignUp"><Apple /></a>
+					<button><Google /></button>
+					<button><Facebook /></button>
+					<button><Apple /></button>
 				</div>
 				<p class="mt-2 text-sm text-gray-300">or use Your <strong> Email Registration</strong></p>
 			</div>
 
-			<div class="mb-4">
-				<label class="mb-2 block text-gray-300" for="email">Name</label>
-				<input
-					class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange"
-					type="text"
-					id="email"
-					placeholder="Name"
-					required
-				/>
-			</div>
 			<div class="mb-4">
 				<label class="mb-2 block text-gray-300" for="email">Email</label>
 				<input
@@ -71,13 +71,13 @@
 					type="email"
 					id="email"
 					placeholder="Email"
-                    bind:value={email}
-                    oninput={validateEmail}
+					bind:value={email}
+					oninput={validateEmail}
 					required
 				/>
-                {#if emailError} 
-                <p class="text-red-500 mt-1">{emailError}</p>
-                {/if}
+				{#if emailError}
+					<p class="mt-1 text-red-500">{emailError}</p>
+				{/if}
 			</div>
 
 			<div class="mb-6">
@@ -88,9 +88,10 @@
 						type={passwordVisible ? 'text' : 'password'}
 						id="password"
 						placeholder="Password"
+						bind:value={password}
 						required
 					/>
-					<buttob
+					<button
 						class="absolute inset-y-0 right-0 flex items-center pr-3"
 						onclick={togglePasswordVisibility}
 					>
@@ -143,17 +144,17 @@
 									stroke-linejoin="round"
 								></path>
 							</svg>
-						{/if}</buttob
+						{/if}</button
 					>
 				</div>
 			</div>
 
 			<div class="flex justify-center">
-				<a href="/"
-					class="rounded-lg bg-orange px-10 py-2 text-white hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-orange"
+				<button
+					class="rounded-lg bg-orange px-10 py-2 text-white hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-orange" onclick={handleSignup}
 				>
 					Sign Up
-				</a>
+				</button>
 			</div>
 		</form>
 	</div>

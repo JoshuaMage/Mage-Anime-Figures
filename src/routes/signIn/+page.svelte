@@ -1,31 +1,75 @@
-<script>
-	import { auth } from '$lib/firebaseConfig';
-	import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+<script lang="ts">
 	import sakimoto from '../../image/bg-image.png';
-	import { get, writable } from 'svelte/store';
-	import { error } from '@sveltejs/kit';
+
+	import { initializeApp } from 'firebase/app';
+	import {
+		getAuth,
+		signInWithEmailAndPassword,
+		signOut,
+		type User,
+		onAuthStateChanged,
+		signInWithPopup,
+		GoogleAuthProvider,
+		GithubAuthProvider
+	} from 'firebase/auth';
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
+
 	let email = '';
 	let password = '';
+	let user: User | null;
 	let loginError = '';
 	let isLoggedIn = writable(false);
-	// Your web app's Firebase configuration
+	
 
-	// Initialize Firebase
+	const firebaseConfig = {
+		apiKey: 'AIzaSyBGOZIvnm7GbPUwpP12CEjYqs1BOg5G_E8',
+		authDomain: 'mage-anime-figures-f91a3.firebaseapp.com',
+		databaseURL: 'https://mage-anime-figures-f91a3-default-rtdb.firebaseio.com',
+		projectId: 'mage-anime-figures-f91a3',
+		storageBucket: 'mage-anime-figures-f91a3.firebasestorage.app',
+		messagingSenderId: '771814892177',
+		appId: '1:771814892177:web:3939a1b3c77ff89a9d1530',
+		measurementId: 'G-MNCSECRB5W'
+	};
+
+	const app = initializeApp(firebaseConfig);
 
 	const login = () => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				const user = userCredential.user;
-				isLoggedIn.set(true)
-				console.log(user);
-				window.location.href = '/';
-			})
-			.catch((error) => {
-				const erroCode = error.code;
-				const errorMessage = error.message;
-				loginError = 'Incorrect password or email';
-			});
+		const auth = getAuth(app);
+		signInWithEmailAndPassword(auth, email, password).catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.log(errorCode, errorMessage);
+			isLoggedIn.set(true);
+			loginError = 'Incorrect password or email';
+		});
 	};
+
+	// const loginWithGoogle = () => {
+	// 	const auth = getAuth(app);
+	// 	signInWithPopup(auth, new GoogleAuthProvider());
+	// };
+
+	// const loginWithGithub = () => {
+	// 	const auth = getAuth(app);
+	// 	signInWithPopup(auth, new GithubAuthProvider());
+	// };
+
+	const logout = async () => {
+		const auth = getAuth(app);
+		signOut(auth);
+	};
+
+	onMount(async () => {
+		const auth = getAuth(app);
+		onAuthStateChanged(auth, (newUser) => {
+			console.log(user);
+			user = newUser;
+		});
+	});
+
+
 </script>
 
 <div class="relative flex min-h-screen items-center justify-center bg-slate-950">
@@ -50,6 +94,7 @@
 					bind:value={email}
 					placeholder="Email Address"
 					required
+					
 				/>
 			</div>
 
@@ -62,6 +107,7 @@
 					bind:value={password}
 					placeholder="Password"
 					required
+					
 				/>
 			</div>
 
@@ -72,6 +118,11 @@
 				>
 					Login
 				</button>
+				{#if user}
+					<button class="text-orange hover:underline focus:outline-none" onclick={logout}>
+						logOut
+					</button>
+				{/if}
 				<button class="text-orange hover:underline focus:outline-none"> Forgot Password? </button>
 			</div>
 			{#if loginError}
