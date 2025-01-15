@@ -5,12 +5,13 @@
 	import Facebook from '../../svg/facebook.svelte';
 	import Google from '../../svg/google.svelte';
 	import Apple from '../../svg/apple.svelte';
+	import { goto } from '$app/navigation';
 
 	let passwordVisible = false;
 	let emailError = '';
 	let email = '';
 	let password = '';
-	let error = null;
+	let error = '';
 
 
 	function togglePasswordVisibility() {
@@ -34,6 +35,7 @@
 		try {
 			// Firebase signup
 			await createUserWithEmailAndPassword(auth, email, password);
+			goto('/new')
 		} catch (err) {
 			if (err instanceof Error) {
 				error = err.message;
@@ -67,7 +69,7 @@
 			<div class="mb-4">
 				<label class="mb-2 block text-gray-300" for="email">Email</label>
 				<input
-					class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange"
+					class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange placeholder:italic"
 					type="email"
 					id="email"
 					placeholder="Email"
@@ -84,7 +86,7 @@
 				<label class="mb-2 block text-gray-300" for="password">Password</label>
 				<div class="relative">
 					<input
-						class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange"
+						class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange placeholder:italic"
 						type={passwordVisible ? 'text' : 'password'}
 						id="password"
 						placeholder="Password"
@@ -151,7 +153,7 @@
 
 			<div class="flex justify-center">
 				<button
-					class="rounded-lg bg-orange px-10 py-2 text-white hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-orange" onclick={handleSignup}
+					class="rounded-lg bg-orange px-10 py-2 text-white active:bg-white active:text-black focus:outline-none focus:ring-2 focus:ring-orange" onclick={handleSignup}
 				>
 					Sign Up
 				</button>

@@ -29,3 +29,4 @@ if (typeof window !== 'undefined') {
 
 // Export the initialized Firebase services
 export { auth, analytics };
+export {app}

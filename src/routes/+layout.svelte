@@ -1,13 +1,17 @@
 <script lang="ts">
+	 import { getAuth, signOut,type User } from 'firebase/auth';
+    import { writable } from 'svelte/store';
+    import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
+	import {app} from '$lib/firebaseConfig'
 	import '../app.css';
 	import Footer from './components/footer.svelte';
-	let { children } = $props();
 
+	let { children } = $props();
 	let toggleArrow = $state(false);
 	let figureList = $state(false);
-
-
-
+	
+	let user = writable<User | null>(null); 
 
 	function handleList() {
 		figureList = !figureList;
@@ -16,7 +20,21 @@
 		toggleArrow = !toggleArrow;
 	}
 	
-	
+	const auth = getAuth(app);
+	const logout = () => {
+        signOut(auth).then(() => {
+            user.set(null);
+            goto('/signIn'); // Redirect to SignIn page after logout
+        }).catch((error) => {
+            console.log('Logout error:', error);
+        });
+    };
+
+	onMount(() => {
+        auth.onAuthStateChanged((currentUser) => {
+            user.set(currentUser); // Update user state when auth state changes
+        });
+    });
 
 </script>
 
@@ -78,28 +96,29 @@
 					</nav>
 				</div>
 
-				<div class="flex justify-center sm:mt-3 md:gap-1">
+				<div class="flex justify-center sm:mt-3 md:gap-2">
 					<input
 						type="text"
 						name="searchFigure"
 						id="searchFigure"
 						class="h-6 rounded-lg text-center text-black sm:w-[30%] md:w-[50%]"
 					/>
-					<section class="flex sm:ml-4 sm:gap-5 md:gap-1 lg:ml-0">
-						<a href="/signIn" class="flex gap-1 lg:font-bold">
+					<section class="flex sm:ml-4 sm:gap-5 md:gap-8 lg:ml-0">
+						{#if $user} 
+						<!-- If the user is logged in, show the log-out button -->
+						<button class="flex gap-1 lg:font-bold  active:underline" onclick={logout}>
+							Log Out
+						</button>
+					{:else}
+						<!-- If the user is not logged in, show the Sign In link -->
+						<a href="/signIn" class="flex gap-1 lg:font-bold active:underline">
 							<span>
-								<img
-									width="24"
-									height="24"
-									src="https://img.icons8.com/forma-bold/24/FFFFFF/user.png"
-									alt="user"
-								/>
+								<img width="24" height="24" src="https://img.icons8.com/forma-bold/24/FFFFFF/user.png" alt="user" />
 							</span>
 							Sign In
 						</a>
-				
-						<button class="font-bold" >Log-out</button>
-					
+					{/if}
+
 
 						<a href="/cart">
 							<img
