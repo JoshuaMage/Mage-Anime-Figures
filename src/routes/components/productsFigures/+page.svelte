@@ -1,15 +1,17 @@
 <script>
 	// @ts-nocheck
-
+	
 	import PaginationLeft from '../../../svg/paginationLeft.svelte';
 	import PaginationRight from '../../../svg/paginationRight.svelte';
 	import Cart from '../../../svg/cart.svelte';
+	import { cartItems } from '$lib/store';
 
 	export let data = [];
 	export let itemsPerPage = 9;
 	export let gridCols = 3;
 	export let gridRows = 3;
 	export let sortOption = '';
+
 
 	let currentIndexes = {};
 	let fadingImage = null;
@@ -155,6 +157,11 @@
 		}
 	}
 
+	//Addtocart items
+	function addToCart(item) {
+        cartItems.update((items) => [...items, item]);
+    }
+
 	$: sortedData = getSortedData(data, sortOption);
 	$: imageSizeClass = gridCols === 3 ? 'md:grid-rows-[30rem]' : 'md:grid-rows-[25rem]';
 </script>
@@ -265,7 +272,7 @@
 					<img
 						src={selectedItem.image[currentIndexes[selectedItem.name]]}
 						alt="Selected Item"
-						class="mb-4 h-[30rem] w-9/12 rounded-md"
+						class="mb-4 h-[30rem] w-full rounded-md"
 					/>
 					<button
 						class="mt-4 rounded-full border border-white bg-black px-6 py-3 text-sm text-white active:border-2"
@@ -289,18 +296,21 @@
 					</h6>
 					<button
 						class="rounded-full bg-blue-500 px-10 py-4 text-white opacity-100 active:opacity-70"
-						>Add to Cart</button
+						onclick={() => addToCart(selectedItem)}>Add to Cart</button
 					>
-					<section class="flex text-xs gap-6 mt-5">
+					<section class="mt-5 flex gap-6 text-xs">
 						<button class="hover:underline">Return Policy</button>
 						<button class="hover:underline">Shipping Policy</button>
 					</section>
 
-					<section class="flex flex-col text-xs  text-start mt-8 gap-2">
+					<section class="mt-8 flex flex-col gap-2 text-start text-xs">
 						<p><span>&#9888</span> Product Warning/Cautions</p>
-						<p> <span>&#9888</span>  <strong>WARNING:</strong>  CHOKING HAZARD - Small Parts. Not for children under 5 years.</p>
+						<p>
+							<span>&#9888</span> <strong>WARNING:</strong> CHOKING HAZARD - Small Parts. Not for children
+							under 5 years.
+						</p>
 					</section>
-					<h2 class="font-bold absolute bottom-0 right-0 m-5">Mage Family <span>&#9827;</span></h2>
+					<h2 class="absolute bottom-0 right-0 m-5 font-bold">Mage Family <span>&#9827;</span></h2>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 <script>
-	  import { paginationForImage } from '$lib/store';
+
 	import { writable } from 'svelte/store';
 	import { createEventDispatcher } from 'svelte';
 	import FilterIcon from '../../../svg/filterIcon.svelte';
@@ -37,7 +37,7 @@
 	let sideSelection = true;
 	let selectedSort = 'New to Old';
 	let isFilterIconClicked = false;
-	let localPaginationForImage = writable($paginationForImage);
+
 
 	//store for input sorting
 

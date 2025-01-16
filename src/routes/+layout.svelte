@@ -1,17 +1,23 @@
 <script lang="ts">
-	 import { getAuth, signOut,type User } from 'firebase/auth';
-    import { writable } from 'svelte/store';
-    import { onMount } from 'svelte';
-    import { goto } from '$app/navigation';
-	import {app} from '$lib/firebaseConfig'
+	import { getAuth, signOut, type User } from 'firebase/auth';
+	import { writable } from 'svelte/store';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { app } from '$lib/firebaseConfig';
 	import '../app.css';
 	import Footer from './components/footer.svelte';
+
+	import { isCartVisible, cartItems } from '$lib/store';
+	import type { CartItem } from '$lib/user';
+
+	function toggleCartItem() {
+		isCartVisible.set(true);
+	}
 
 	let { children } = $props();
 	let toggleArrow = $state(false);
 	let figureList = $state(false);
-	
-	let user = writable<User | null>(null); 
+	let user = writable<User | null>(null);
 
 	function handleList() {
 		figureList = !figureList;
@@ -19,28 +25,29 @@
 	function handleArrow() {
 		toggleArrow = !toggleArrow;
 	}
-	
+
 	const auth = getAuth(app);
 	const logout = () => {
-        signOut(auth).then(() => {
-            user.set(null);
-            goto('/signIn'); // Redirect to SignIn page after logout
-        }).catch((error) => {
-            console.log('Logout error:', error);
-        });
-    };
+		signOut(auth)
+			.then(() => {
+				user.set(null);
+				goto('/signIn'); // Redirect to SignIn page after logout
+			})
+			.catch((error) => {
+				console.log('Logout error:', error);
+			});
+	};
 
 	onMount(() => {
-        auth.onAuthStateChanged((currentUser) => {
-            user.set(currentUser); // Update user state when auth state changes
-        });
-    });
-
+		auth.onAuthStateChanged((currentUser) => {
+			user.set(currentUser); // Update user state when auth state changes
+		});
+	});
 </script>
 
 <div class="flex flex-col overflow-x-hidden bg-slate-950 text-slate-50 md:m-auto md:px-2">
 	<div
-		class=" flex content-center justify-center sm:gap-5 sm:text-[10px] md:text-lg lg:gap-20 lg:py-2"
+		class="flex content-center justify-center sm:gap-5 sm:text-[10px] md:text-lg lg:gap-20 lg:py-2"
 	>
 		<button onclick={handleArrow} class="hover:lg:font-bold"> &#11164 </button>
 		{#if toggleArrow}
@@ -104,30 +111,60 @@
 						class="h-6 rounded-lg text-center text-black sm:w-[30%] md:w-[50%]"
 					/>
 					<section class="flex sm:ml-4 sm:gap-5 md:gap-8 lg:ml-0">
-						{#if $user} 
-						<!-- If the user is logged in, show the log-out button -->
-						<button class="flex gap-1 lg:font-bold  active:underline" onclick={logout}>
-							Log Out
-						</button>
-					{:else}
-						<!-- If the user is not logged in, show the Sign In link -->
-						<a href="/signIn" class="flex gap-1 lg:font-bold active:underline">
-							<span>
-								<img width="24" height="24" src="https://img.icons8.com/forma-bold/24/FFFFFF/user.png" alt="user" />
-							</span>
-							Sign In
-						</a>
-					{/if}
+						{#if $user}
+							<button class="flex gap-1 active:underline lg:font-bold" onclick={logout}>
+								Log Out
+							</button>
+						{:else}
+							<a href="/signIn" class="flex gap-1 active:underline lg:font-bold">
+								<span>
+									<img
+										width="24"
+										height="24"
+										src="https://img.icons8.com/forma-bold/24/FFFFFF/user.png"
+										alt="user"
+									/>
+								</span>
+								Sign In
+							</a>
+						{/if}
 
-
-						<a href="/cart">
+						<button onclick={toggleCartItem}>
 							<img
 								width="24"
 								height="24"
 								src="https://img.icons8.com/ios-filled/50/FFFFFF/shopping-bag.png"
 								alt="shopping-bag"
 							/>
-						</a>
+						</button>
+
+						{#if $isCartVisible}
+							<div class="fixed inset-0 z-50 flex justify-end bg-black bg-opacity-50 text-black">
+								<div class="w-1/3 bg-white p-5">
+									<h2 class="text-xl font-bold">Your Cart</h2>
+									{#if $cartItems.length > 0}
+										<ul>
+											{#each $cartItems as item}
+												<li class="flex justify-between py-2">
+													<img src={item.image} alt={item.description} class="h-4 w-4" />
+													<span>{item.description}</span>
+													<span>${item.price}</span>
+													<span>{item.availability}</span>
+												</li>
+											{/each}
+										</ul>
+									{:else}
+										<p>Your cart is empty!</p>
+									{/if}
+									<button
+										onclick={() => isCartVisible.set(false)}
+										class="mt-4 w-full rounded bg-red-500 py-2 text-white"
+									>
+										Close Cart
+									</button>
+								</div>
+							</div>
+						{/if}
 					</section>
 				</div>
 			</div>
