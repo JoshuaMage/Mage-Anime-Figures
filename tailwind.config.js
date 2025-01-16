@@ -104,6 +104,10 @@ const config = {
         fade: 'fade 1.5s ease-in-out',
         scroll: 'scroll 30s linear infinite',
         scrollReverse: 'scrollReverse 30s linear infinite'
+      },
+      gridTemplateColumns: {
+        '3-cols': 'repeat(3, minmax(0, 1fr))',
+        '4-cols': 'repeat(4, minmax(0, 1fr))',
       }
     }
   }

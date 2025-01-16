@@ -1,5 +1,5 @@
 <script>
-	import {auth} from '$lib/firebaseConfig'
+	import { auth } from '$lib/firebaseConfig';
 	import { createUserWithEmailAndPassword } from 'firebase/auth';
 	import sakimoto from '../../image/signUpImage.gif';
 	import Facebook from '../../svg/facebook.svelte';
@@ -12,7 +12,6 @@
 	let email = '';
 	let password = '';
 	let error = '';
-
 
 	function togglePasswordVisibility() {
 		passwordVisible = !passwordVisible;
@@ -35,7 +34,7 @@
 		try {
 			// Firebase signup
 			await createUserWithEmailAndPassword(auth, email, password);
-			goto('/new')
+			goto('/new');
 		} catch (err) {
 			if (err instanceof Error) {
 				error = err.message;
@@ -43,7 +42,7 @@
 				error = 'An unknown error occurred';
 			}
 		}
-	}
+	};
 </script>
 
 <div class="relative flex min-h-screen items-center justify-center bg-slate-950">
@@ -56,20 +55,24 @@
 			class="relative w-full max-w-5xl rounded-lg bg-black bg-opacity-50 p-10 text-white shadow-md"
 		>
 			<div class="mb-6 text-center">
-				<h1 class="mb-2 text-4xl font-bold">Create Account</h1>
+				<h1 class="mb-2 font-bold md:text-4xl">Create Account</h1>
 
-				<div class="mt-4 flex justify-center gap-5">
+				<div class="mt-4 flex justify-center md:gap-5">
 					<button><Google /></button>
 					<button><Facebook /></button>
 					<button><Apple /></button>
 				</div>
-				<p class="mt-2 text-sm text-gray-300">or use Your <strong> Email Registration</strong></p>
+				<p class="mt-2 text-gray-300 sm:text-xs md:text-sm">
+					or use Your <strong> Email Registration</strong>
+				</p>
 			</div>
 
 			<div class="mb-4">
-				<label class="mb-2 block text-gray-300" for="email">Email</label>
+				<label class="block text-gray-300 sm:mb-1 sm:text-xs md:mb-2 md:text-lg" for="email"
+					>Email</label
+				>
 				<input
-					class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange placeholder:italic"
+					class="w-full rounded-lg border text-black placeholder:italic focus:outline-none focus:ring-2 focus:ring-orange sm:px-1 sm:py-1 sm:text-xs md:px-3 md:py-2 md:text-lg"
 					type="email"
 					id="email"
 					placeholder="Email"
@@ -78,15 +81,17 @@
 					required
 				/>
 				{#if emailError}
-					<p class="mt-1 text-red-500">{emailError}</p>
+					<p class="mt-1 text-red-500 sm:text-[10px] md:text-sm">{emailError}</p>
 				{/if}
 			</div>
 
 			<div class="mb-6">
-				<label class="mb-2 block text-gray-300" for="password">Password</label>
+				<label class="block text-gray-300 sm:mb-1 sm:text-xs md:mb-2 md:text-lg" for="password"
+					>Password</label
+				>
 				<div class="relative">
 					<input
-						class="w-full rounded-lg border px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-orange placeholder:italic"
+						class="w-full rounded-lg border text-black placeholder:italic focus:outline-none focus:ring-2 focus:ring-orange sm:px-1 sm:py-1 sm:text-xs md:px-3 md:py-2 md:text-lg"
 						type={passwordVisible ? 'text' : 'password'}
 						id="password"
 						placeholder="Password"
@@ -100,11 +105,10 @@
 						{#if passwordVisible}
 							<!-- Eye Open Icon -->
 							<svg
-								width="24px"
-								height="24px"
 								viewBox="0 0 24 24"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
+								class="sm:size-4 md:size-6"
 							>
 								<path
 									d="M12 5C5.63636 5 2 12 2 12C2 12 5.63636 19 12 19C18.3636 19 22 12 22 12C22 12 18.3636 5 12 5Z"
@@ -118,8 +122,7 @@
 						{:else}
 							<!-- Eye Closed Icon -->
 							<svg
-								width="24px"
-								height="24px"
+								class="sm:size-4 md:size-6"
 								viewBox="0 0 24 24"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +156,8 @@
 
 			<div class="flex justify-center">
 				<button
-					class="rounded-lg bg-orange px-10 py-2 text-white active:bg-white active:text-black focus:outline-none focus:ring-2 focus:ring-orange" onclick={handleSignup}
+					class="rounded-lg bg-orange px-10 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange active:bg-white active:text-black"
+					onclick={handleSignup}
 				>
 					Sign Up
 				</button>

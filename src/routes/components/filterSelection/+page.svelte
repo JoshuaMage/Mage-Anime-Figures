@@ -1,5 +1,6 @@
 <script>
-
+	  import { paginationForImage } from '$lib/store';
+	import { writable } from 'svelte/store';
 	import { createEventDispatcher } from 'svelte';
 	import FilterIcon from '../../../svg/filterIcon.svelte';
 	import DropdownIcon from '../../../svg/dropdownIcon.svelte';
@@ -15,6 +16,7 @@
 	export let sortOption = '';
 	export let currentPage = 0;
 	export let showSelectionAnimeBrand = true;
+
 
 	//count the Product per availability
 	export let availableCount = 0;
@@ -35,6 +37,7 @@
 	let sideSelection = true;
 	let selectedSort = 'New to Old';
 	let isFilterIconClicked = false;
+	let localPaginationForImage = writable($paginationForImage);
 
 	//store for input sorting
 
@@ -66,12 +69,15 @@
 		gridCols = 3;
 		gridRows = 3;
 		itemsPerPage = 9;
+		
 	}
 
 	function setGrid4x4() {
 		gridCols = 4;
 		gridRows = 3;
 		itemsPerPage = 12;
+	
+
 	}
 
 	/**
@@ -99,54 +105,54 @@
 </script>
 
 <div>
-	<div class="sm:text-[13px] md:text-lg flex content-center items-center justify-center gap-5">
-		<div class="md:mx-14 flex md:w-[120rem] md:justify-between sm:gap-10 md:gap-0">
-			<div class="flex md:gap-20 sm:gap-3">
-				<button class="flex sm:text-[12px] lg:text-lg md:gap-2" onclick={handleSelection}
+	<div class="flex content-center items-center justify-center gap-5 sm:text-[13px] md:text-lg">
+		<div class="flex sm:gap-10 md:mx-14 md:w-[120rem] md:justify-between md:gap-0">
+			<div class="flex sm:gap-3 md:gap-20">
+				<button class="flex sm:text-[12px] md:gap-2 lg:text-lg" onclick={handleSelection}
 					>Hide Filters
-					<span class="sm:hidden md:block"><FilterIcon  {isFilterIconClicked} /></span>
+					<span class="sm:hidden md:block"><FilterIcon {isFilterIconClicked} /></span>
 				</button>
 				<h2 class="sm:text-[12px] lg:text-lg">(count)</h2>
 			</div>
 
 			<div class="flex justify-end sm:gap-5 md:gap-20">
 				<div class="relative sm:pl-10 md:pl-0">
-					<button class="flex sm:gap-1 md:gap-2 sm:text-[12px] lg:text-lg" onclick={handleFilter}>
+					<button class="flex sm:gap-1 sm:text-[12px] md:gap-2 lg:text-lg" onclick={handleFilter}>
 						Sort By <span>({selectedSort})</span>
 						<span class="sm:hidden md:block"><DropdownIcon /></span>
 					</button>
 
 					{#if filterItem}
 						<ul
-							class="border-md absolute left-8 z-50 mt-2 sm:w-28 md:w-[10rem] rounded-lg border border-x-white bg-black py-3 text-start text-white sm:text-xs md:text-[17px] md:leading-7 px-1  "
+							class="border-md absolute left-8 z-50 mt-2 rounded-lg border border-x-white bg-black px-1 py-3 text-start text-white sm:w-28 sm:text-xs md:w-[10rem] md:text-[17px] md:leading-7"
 						>
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('New to Old')}>New to Old </button>
 							</li>
 
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('Old to New')}>Old to New </button>
 							</li>
 
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('Recommended')}>Recommended</button>
 							</li>
 
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('Name A-Z')}>Name A-Z</button>
 							</li>
 
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('Name Z-A')}>Name Z-A</button>
 							</li>
 
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('low to high')}
 									>Price(low to high)</button
 								>
 							</li>
 
-							<li class=" hover:bg-white hover:text-black rounded-md">
+							<li class=" rounded-md hover:bg-white hover:text-black">
 								<button onclick={() => handleSortSelection('high to low')}
 									>Price(Hign to Low)</button
 								>
@@ -162,13 +168,15 @@
 		</div>
 	</div>
 
-	<div class="sm:mx-1 md:mx-14 flex content-center items-center justify-center sm:text-[12px] lg:text-lg">
+	<div
+		class="flex content-center items-center justify-center sm:mx-1 sm:text-[12px] md:mx-14 lg:text-lg"
+	>
 		<div class="flex w-[120rem] justify-center">
 			{#if sideSelection}
 				<div class="basis-[10%]">
-					<div class="mt-10 w-full sm:text-[11px] md:text-xl ">
+					<div class="mt-10 w-full sm:text-[11px] md:text-xl">
 						<section class="flex justify-between">
-							<h2 >In-Stock</h2>
+							<h2>In-Stock</h2>
 							<button onclick={handleStock}>
 								{#if inStock}
 									<ArrowUpIcon />
@@ -178,7 +186,7 @@
 							</button>
 						</section>
 						{#if inStock}
-							<section class="mt-3 flex md:gap-1 delay-1000 ">
+							<section class="mt-3 flex delay-1000 md:gap-1">
 								<input type="Checkbox" />
 								<h4 class="sm:text-[10px] lg:text-lg">Pre-Order</h4>
 								<p class="sm:text-[10px] lg:text-lg">({preOrderCount})</p>
@@ -194,7 +202,7 @@
 
 					{#if showSelectionAnimeBrand}
 						<div class="mt-10 w-full">
-							<section class="flex justify-between ">
+							<section class="flex justify-between">
 								<h2 class="sm:text-[11px] md:text-xl">Selection Anime</h2>
 								<button onclick={handleSelectANime}>
 									{#if selectAnime}
@@ -238,29 +246,29 @@
 							</button>
 						</section>
 						{#if selectPrice}
-							<section class="flex md:gap-1  items-center">
+							<section class="flex items-center md:gap-1">
 								<input type="checkbox" />
 								<h4 class="sm:text-[10px] lg:text-lg">$0 - $25</h4>
 								<p class="px-1">({countPriceRange1})</p>
 							</section>
-							<section class="flex md:gap-1  items-center">
+							<section class="flex items-center md:gap-1">
 								<input type="checkbox" />
 								<h4 class="sm:text-[10px] lg:text-lg">$25 - $50</h4>
 								<p class="px-1">({countPriceRange2})</p>
 							</section>
-							<section class="flex md:gap-1  items-center">
+							<section class="flex items-center md:gap-1">
 								<input type="checkbox" />
 								<h4 class="sm:text-[10px] lg:text-lg">$50 - $75</h4>
 								<p class="px-1">({countPriceRange3})</p>
 							</section>
-							<section class="flex md:gap-1  items-center">
+							<section class="flex items-center md:gap-1">
 								<input type="checkbox" />
 								<h4 class="sm:text-[10px] lg:text-lg">$75 - $100</h4>
 								<p class="px-1">({countPriceRange4})</p>
 							</section>
-							<section class="flex md:gap-1  items-center">
+							<section class="flex items-center md:gap-1">
 								<input type="checkbox" />
-								<h4 class="sm:text-[10px] lg:text-lg" >$100+</h4>
+								<h4 class="sm:text-[10px] lg:text-lg">$100+</h4>
 								<p class="px-1">({countPriceRange5})</p>
 							</section>
 						{/if}

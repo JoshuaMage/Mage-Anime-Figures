@@ -1,5 +1,6 @@
 <script>
 	// @ts-nocheck
+
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { bleachFiguresAnime } from '../../Products/BLEACH/index';
@@ -21,6 +22,9 @@
 	let countPriceRange3 = 0; // $50 - $75
 	let countPriceRange4 = 0; // $75 - $100
 	let countPriceRange5 = 0; // $100+
+	
+
+
 
 	export const filter = writable({
 		checkboxes: []
@@ -101,6 +105,6 @@
 		{countPriceRange4}
 		{countPriceRange5}
 	>
-		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption} />
+		<ProductsFigures data={bleachFiguresAnime} {itemsPerPage} {gridCols} {gridRows} {sortOption}  } />
 	</FilterSelection>
 </div>
