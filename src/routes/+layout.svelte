@@ -6,9 +6,9 @@
 	import { app } from '$lib/firebaseConfig';
 	import '../app.css';
 	import Footer from './components/footer.svelte';
+	import CartItem from './components/cartItem/cartItem.svelte';
 
-	import { isCartVisible, cartItems } from '$lib/store';
-	import type { CartItem } from '$lib/user';
+	import { isCartVisible } from '$lib/store';
 
 	function toggleCartItem() {
 		isCartVisible.set(true);
@@ -138,33 +138,9 @@
 							/>
 						</button>
 
-						{#if $isCartVisible}
-							<div class="fixed inset-0 z-50 flex justify-end bg-black bg-opacity-50 text-black">
-								<div class="w-1/3 bg-white p-5">
-									<h2 class="text-xl font-bold">Your Cart</h2>
-									{#if $cartItems.length > 0}
-										<ul>
-											{#each $cartItems as item}
-												<li class="flex justify-between py-2">
-													<img src={item.image} alt={item.description} class="h-4 w-4" />
-													<span>{item.description}</span>
-													<span>${item.price}</span>
-													<span>{item.availability}</span>
-												</li>
-											{/each}
-										</ul>
-									{:else}
-										<p>Your cart is empty!</p>
-									{/if}
-									<button
-										onclick={() => isCartVisible.set(false)}
-										class="mt-4 w-full rounded bg-red-500 py-2 text-white"
-									>
-										Close Cart
-									</button>
-								</div>
-							</div>
-						{/if}
+						<div>
+							<CartItem />
+						</div>
 					</section>
 				</div>
 			</div>

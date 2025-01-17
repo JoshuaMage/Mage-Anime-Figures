@@ -224,7 +224,7 @@
 						</div>
 
 						<div class="px-2">
-							<button>
+							<button >
 								<Cart />
 							</button>
 						</div>
