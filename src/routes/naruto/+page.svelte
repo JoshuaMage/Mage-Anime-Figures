@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { narutoFiguresAnime } from '../../Products/naruto/index';
@@ -25,6 +26,9 @@
 	function handleSortChanged(event) {
 		sortOption = event.detail;
 	}
+	onMount(() => {
+		calculateCounts();
+	});
 
 	//counting product per availabilty
 	function calculateCounts() {
@@ -56,15 +60,16 @@
 			}
 		});
 	}
-	calculateCounts();
 </script>
 
 <div
 	class="min-w-screen flex min-h-screen flex-col overflow-x-hidden bg-slate-950 text-center text-slate-50"
 >
-	<div class="pb-10 mx-1">
-		<h1 class="sm:text-2xl md:text-6xl font-bold italic tracking-widest text-orange uppercase">naruto</h1>
-		<p class="sm:mt-2 md:mt-5 sm:text-[10px] md:text-xl tracking-wider">
+	<div class="mx-1 pb-10">
+		<h1 class="font-bold uppercase italic tracking-widest text-orange sm:text-2xl md:text-6xl">
+			naruto
+		</h1>
+		<p class="tracking-wider sm:mt-2 sm:text-[10px] md:mt-5 md:text-xl">
 			Step into the world of <strong class="uppercase">Naruto anime figures!</strong>
 			with our exclusive collection of high-quality anime figures, designed to bring your favorite characters
 			to life <br />

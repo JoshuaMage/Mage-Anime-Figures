@@ -4,7 +4,7 @@
 	import PaginationLeft from '../../../svg/paginationLeft.svelte';
 	import PaginationRight from '../../../svg/paginationRight.svelte';
 	import Cart from '../../../svg/cart.svelte';
-	import { cartItems } from '$lib/store';
+	import { cartItems, orderCount } from '$lib/store';
 
 	export let data = [];
 	export let itemsPerPage = 9;
@@ -17,6 +17,8 @@
 	let currentPage = 0;
 	let sortedData = [...data];
 	let addedItem = null;
+
+
 
 	//hovering product description
 	let descriptionHovering = false;
@@ -158,23 +160,26 @@
 	}
 
 	//Addtocart items
+
 	function addToCart(item) {
 		cartItems.update((items) => {
-			// Check if item is already in cart, if so, just increment the count
 			const existingItem = items.find((cartItem) => cartItem.id === item.id);
 			if (existingItem) {
 				existingItem.count++;
 			} else {
-				// Otherwise, add the item with a count of 1
 				item.count = 0;
 				items.push(item);
 			}
-			addedItem = item;
-			setTimeout(() => {
-				addedItem = null;
-			}, 1000);
+
+			// Update the order count store
+			orderCount.update((count) => count + 1); // Increment the cart count
 			return items;
 		});
+
+		addedItem = item;
+		setTimeout(() => {
+			addedItem = null;
+		}, 1000);
 	}
 
 	$: sortedData = getSortedData(data, sortOption);
@@ -238,14 +243,18 @@
 							</h2>
 						</div>
 
-						<div class="px-2 active:border active:border-white rounded-full">
+						<div class="rounded-full px-2 active:border active:border-white">
 							<button onclick={() => addToCart(item)}>
 								<Cart />
 							</button>
 						</div>
 					</div>
 					{#if addedItem === item}
-						<p  class="fixed top-2/4 right-4 z-50 bg-[#FBFBFB] py-3 px-6 text-xs font-bold text-black shadow-2xl rounded-md animate-spin  duration-75 -translate-y-10">Item added to cart <span>&#9989;</span></p>
+						<p
+							class="fixed right-4 top-1/3 z-50 -translate-y-10 animate-spin rounded-md bg-[#FBFBFB] px-6 py-3 text-xs font-bold text-black shadow-2xl duration-75"
+						>
+							Item added to cart <span>&#9989;</span>
+						</p>
 					{/if}
 				{/if}
 			</div>

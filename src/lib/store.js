@@ -1,10 +1,7 @@
-// paginationStore.js
-  import { writable } from 'svelte/store';
+// src/lib/store.ts
+import { writable } from 'svelte/store';
 
-  // Store to manage cart items
-  export const cartItems = writable([]);
+export const isCartVisible = writable(false);
 
-  // Store to manage cart visibility
-  export const isCartVisible = writable(false);
-
-  export const orderCount = writable(0)
+export const cartItems = writable([]); // Define cart items as a writable store
+export const orderCount = writable(0); // Order count for the badge

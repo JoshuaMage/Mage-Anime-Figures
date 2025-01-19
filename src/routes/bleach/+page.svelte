@@ -1,6 +1,6 @@
 <script>
 	// @ts-nocheck
-
+	import { onMount } from 'svelte';
 	import FilterSelection from '../components/filterSelection/+page.svelte';
 	import ProductsFigures from '../components/productsFigures/+page.svelte';
 	import { bleachFiguresAnime } from '../../Products/BLEACH/index';
@@ -35,6 +35,9 @@
 	function handleSortChanged(event) {
 		sortOption = event.detail; // Update the sort option when changed
 	}
+	onMount(() => {
+		calculateCounts();
+	});
 
 	//counting product per availabilty
 	function calculateCounts() {
@@ -67,7 +70,7 @@
 		});
 	}
 
-	calculateCounts();
+
 
 	
 </script>

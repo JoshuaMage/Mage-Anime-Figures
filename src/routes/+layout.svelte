@@ -8,7 +8,7 @@
 	import Footer from './components/footer.svelte';
 	import CartItem from './components/cartItem/cartItem.svelte';
 
-	import { isCartVisible } from '$lib/store';
+	import { isCartVisible, orderCount } from '$lib/store';
 
 	function toggleCartItem() {
 		isCartVisible.set(true);
@@ -22,6 +22,7 @@
 	function handleList() {
 		figureList = !figureList;
 	}
+
 	function handleArrow() {
 		toggleArrow = !toggleArrow;
 	}
@@ -46,17 +47,7 @@
 </script>
 
 <div class="flex flex-col overflow-x-hidden bg-slate-950 text-slate-50 md:m-auto md:px-2">
-	<div
-		class="flex content-center justify-center sm:gap-5 sm:text-[10px] md:text-lg lg:gap-20 lg:py-2"
-	>
-		<button onclick={handleArrow} class="hover:lg:font-bold"> &#11164 </button>
-		{#if toggleArrow}
-			<p>Mage Anime figures - We sniff your collection before sending them to you</p>
-		{:else}
-			<p>Get FREE shipping on orders over $75!</p>
-		{/if}
-		<button onclick={handleArrow} class="hover:lg:font-bold"> &#11166; </button>
-	</div>
+	<!-- Your header content here -->
 
 	<div class="relative rounded bg-opacity-80 shadow-lg sm:h-[14rem] lg:h-[15rem]">
 		<div class="w-screen py-10">
@@ -129,6 +120,7 @@
 							</a>
 						{/if}
 
+						<!-- Cart Button -->
 						<button onclick={toggleCartItem}>
 							<img
 								width="24"
@@ -136,11 +128,15 @@
 								src="https://img.icons8.com/ios-filled/50/FFFFFF/shopping-bag.png"
 								alt="shopping-bag"
 							/>
+							<!-- Cart Count Badge -->
+							{#if $orderCount > 0}
+								<p
+									class="absolute top-12 ml-5 h-5 w-5 rounded-full bg-orange text-center text-sm text-white"
+								>
+									{$orderCount}
+								</p>
+							{/if}
 						</button>
-
-						<div>
-							<CartItem />
-						</div>
 					</section>
 				</div>
 			</div>
@@ -155,3 +151,8 @@
 <div>
 	<Footer />
 </div>
+
+<!-- Render CartItem only if cart is visible -->
+{#if $isCartVisible}
+	<CartItem />
+{/if}
