@@ -170,6 +170,9 @@
 				items.push(item);
 			}
 			addedItem = item;
+			setTimeout(() => {
+				addedItem = null;
+			}, 1000);
 			return items;
 		});
 	}
@@ -235,14 +238,14 @@
 							</h2>
 						</div>
 
-						<div class="px-2">
+						<div class="px-2 active:border active:border-white rounded-full">
 							<button onclick={() => addToCart(item)}>
 								<Cart />
 							</button>
 						</div>
 					</div>
 					{#if addedItem === item}
-						<p class="w-34 bg-[#FBFBFB] py-2 text-xs font-bold text-black">Item added to cart</p>
+						<p  class="fixed top-2/4 right-4 z-50 bg-[#FBFBFB] py-3 px-6 text-xs font-bold text-black shadow-2xl rounded-md animate-spin  duration-75 -translate-y-10">Item added to cart <span>&#9989;</span></p>
 					{/if}
 				{/if}
 			</div>

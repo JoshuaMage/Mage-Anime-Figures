@@ -34,6 +34,7 @@ const config = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
+    
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input) / <alpha-value>)",
@@ -102,6 +103,7 @@ const config = {
       },
       animation: {
         fade: 'fade 1.5s ease-in-out',
+        
         scroll: 'scroll 30s linear infinite',
         scrollReverse: 'scrollReverse 30s linear infinite'
       },
@@ -110,7 +112,9 @@ const config = {
         '4-cols': 'repeat(4, minmax(0, 1fr))',
       }
     }
+    
   }
+  
 };
 
 export default config;

@@ -179,4 +179,6 @@
 	ul::-webkit-scrollbar-thumb:hover {
 		background-color: #718096; /* Color of the scrollbar thumb on hover */
 	}
+
+	
 </style>
