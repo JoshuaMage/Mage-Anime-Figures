@@ -6,3 +6,5 @@
 
   // Store to manage cart visibility
   export const isCartVisible = writable(false);
+
+  export const orderCount = writable(0)

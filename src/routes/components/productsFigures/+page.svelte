@@ -1,6 +1,6 @@
 <script>
 	// @ts-nocheck
-	
+
 	import PaginationLeft from '../../../svg/paginationLeft.svelte';
 	import PaginationRight from '../../../svg/paginationRight.svelte';
 	import Cart from '../../../svg/cart.svelte';
@@ -12,11 +12,11 @@
 	export let gridRows = 3;
 	export let sortOption = '';
 
-
 	let currentIndexes = {};
 	let fadingImage = null;
 	let currentPage = 0;
 	let sortedData = [...data];
+	let addedItem = null;
 
 	//hovering product description
 	let descriptionHovering = false;
@@ -159,8 +159,20 @@
 
 	//Addtocart items
 	function addToCart(item) {
-        cartItems.update((items) => [...items, item]);
-    }
+		cartItems.update((items) => {
+			// Check if item is already in cart, if so, just increment the count
+			const existingItem = items.find((cartItem) => cartItem.id === item.id);
+			if (existingItem) {
+				existingItem.count++;
+			} else {
+				// Otherwise, add the item with a count of 1
+				item.count = 0;
+				items.push(item);
+			}
+			addedItem = item;
+			return items;
+		});
+	}
 
 	$: sortedData = getSortedData(data, sortOption);
 	$: imageSizeClass = gridCols === 3 ? 'md:grid-rows-[30rem]' : 'md:grid-rows-[25rem]';
@@ -185,7 +197,7 @@
 						onmouseleave={() => (descriptionHovering = false)}
 					/>
 					<button
-						class="w-36 h-12 absolute bottom-14 left-1/2 -translate-x-1/2 transform rounded-full bg-[#3926df]  text-sm font-black tracking-wide opacity-0 transition-opacity duration-300 hover:bg-[#312691] group-hover:opacity-100"
+						class="absolute bottom-14 left-1/2 h-12 w-36 -translate-x-1/2 transform rounded-full bg-[#3926df] text-sm font-black tracking-wide opacity-0 transition-opacity duration-300 hover:bg-[#312691] group-hover:opacity-100"
 						onclick={() => (selectedItem = item)}>Quick View</button
 					>
 					{#if gridCols === 3}
@@ -224,11 +236,14 @@
 						</div>
 
 						<div class="px-2">
-							<button >
+							<button onclick={() => addToCart(item)}>
 								<Cart />
 							</button>
 						</div>
 					</div>
+					{#if addedItem === item}
+						<p class="w-34 bg-[#FBFBFB] py-2 text-xs font-bold text-black">Item added to cart</p>
+					{/if}
 				{/if}
 			</div>
 		{/each}
@@ -298,6 +313,7 @@
 						class="rounded-full bg-blue-500 px-10 py-4 text-white opacity-100 active:opacity-70"
 						onclick={() => addToCart(selectedItem)}>Add to Cart</button
 					>
+
 					<section class="mt-5 flex gap-6 text-xs">
 						<button class="hover:underline">Return Policy</button>
 						<button class="hover:underline">Shipping Policy</button>

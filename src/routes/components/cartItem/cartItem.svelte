@@ -1,10 +1,11 @@
 <script>
 	import { isCartVisible, cartItems } from '$lib/store';
+	import { derived } from 'svelte/store';
+
 
 	// Initialize item count
-	// @ts-ignore
 	function initializeItemCount(items) {
-		return items.map((/** @type {{ count: number | null | undefined; }} */ item) => {
+		return items.map((item) => {
 			if (item.count === undefined || item.count === null) {
 				item.count = 0;
 			}
@@ -14,13 +15,10 @@
 	cartItems.update(initializeItemCount);
 
 	// Increment item count
-	// @ts-ignore
 	function increment(item) {
 		cartItems.update((items) => {
 			return items.map((cartItem) => {
-				// @ts-ignore
 				if (cartItem.id === item.id) {
-					// @ts-ignore
 					cartItem.count = (cartItem.count || 0) + 1;
 				}
 				return cartItem;
@@ -29,7 +27,6 @@
 	}
 
 	// Decrement item count
-	// @ts-ignore
 	function decrement(item) {
 		cartItems.update((items) => {
 			return items.map((cartItem) => {
@@ -42,7 +39,6 @@
 	}
 
 	// Remove item from cart
-	// @ts-ignore
 	function removeItem(item) {
 		cartItems.update((items) => {
 			return items.filter((cartItem) => cartItem.id !== item.id);
@@ -60,18 +56,23 @@
 			});
 		});
 	}
+
+	// Derived store to calculate total price
+	const totalPrice = derived(cartItems, ($cartItems) =>
+		$cartItems.reduce((total, item) => total + item.count * item.price, 0)
+	);
 </script>
 
 <div>
 	{#if $isCartVisible}
 		<div class="fixed inset-0 z-50 flex justify-end bg-black bg-opacity-70 font-[Roboto] text-white">
-			<div class="w-[25rem] bg-gray-950 relative"> <!-- Parent container with fixed width -->
+			<div class="w-[25rem] bg-gray-950 relative">
 				{#if $cartItems.length > 0}
 					<h2 class="mb-10 text-xl font-bold">
 						<strong class="mr-3 text-2xl font-bold">My Cart</strong> ({$cartItems.length}) items
 					</h2>
 
-					<ul class="flex h-full flex-col justify-between overflow-y-auto pb-24 w-full">
+					<ul class="flex h-full flex-col justify-between overflow-y-auto pb-24 w-full max-h-[calc(100vh-10rem)]">
 						{#each $cartItems as item (item.id)}
 							<li class="mb-5 rounded-md bg-gray-800 py-5 w-full">
 								<section class="mb-2 grid grid-cols-2">
@@ -83,7 +84,7 @@
 									<section class="flex flex-col">
 										<p class="mb-1 text-xs">
 											<span
-												class={`${item.availability === 'Available' ? 'text-green-400' : 'text-red-400'} sm:text-[15px] md:text-[30px]`}
+												class={`${item.availability === 'Available' ? 'text-green-400' : 'text-red-400'} sm:text-[15px] md:text-[40px]`}
 											>
 												.
 											</span>{item.availability}
@@ -107,7 +108,7 @@
 												onclick={() => decrement(item)}
 												disabled={item.count <= 0}
 												class={item.count <= 0 ? 'cursor-not-allowed' : ''}>-</button>
-											<p>{item.count}</p>
+											<p class="text-white">{item.count}</p>
 											<button onclick={() => increment(item)}>+</button>
 										</section>
 										<p>${Math.round(item.count * item.price)}</p>
@@ -115,8 +116,8 @@
 
 										{#if item.showDeleteConfirmation}
 											<section
-												class="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform rounded-lg border border-white bg-black bg-transparent px-20 py-10 text-white shadow-lg"
-												role="alertdialog"
+												class="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform rounded-lg border border-white bg-black bg-transparent px-20 py-10 text-white shadow-lg "
+												
 											>
 												<p class="mb-4 text-2xl font-bold">
 													Do you want to remove <br /> this product from your cart?
@@ -140,15 +141,15 @@
 					<p class="text-2xl font-bold">Your cart is empty!</p>
 				{/if}
 
-				<!-- Cart Summary and Confirmation (Aligning to the same width as items) -->
-				<div class="absolute bottom-0 h-40 content-center bg-black px-10 py-5 w-full">
+				<!-- Cart Summary and Confirmation -->
+				<div class="absolute bottom-0 h-40 content-center bg-black px-5 py-5 w-full">
 					<section class="mb-5 flex justify-between px-3">
-						<p class="font-bold">Estimated Total</p>
-						<p>Total price</p>
+						<p class="font-bold">Estimated Total:</p>
+						<p>${Math.round($totalPrice)}</p>
 					</section>
-					<section class="flex justify-between px-3">
-						<button class="w-40 rounded-md border border-white py-2">View Cart</button>
-						<button class="w-40 rounded-md border border-white py-2">Checkout</button>
+					<section class="flex justify-between px-2">
+						<button class="w-40 rounded-md border active:border-2 border-white py-2">View Cart</button>
+						<button class="w-40 rounded-md border border-black bg-blue-950 active:opacity-90 py-2">Checkout</button>
 					</section>
 				</div>
 
@@ -160,3 +161,22 @@
 	{/if}
 </div>
 
+<style>
+	ul::-webkit-scrollbar {
+		width: 8px; /* Width of the scrollbar */
+	}
+
+	ul::-webkit-scrollbar-track {
+		background: #2d3748; /* Background color of the scrollbar track */
+	}
+
+	ul::-webkit-scrollbar-thumb {
+		background-color: #4a5568; /* Color of the scrollbar thumb */
+		border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+		border: 2px solid #2d3748; /* Border around the scrollbar thumb */
+	}
+
+	ul::-webkit-scrollbar-thumb:hover {
+		background-color: #718096; /* Color of the scrollbar thumb on hover */
+	}
+</style>
