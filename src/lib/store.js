@@ -1,7 +1,8 @@
 // paginationStore.js
-import { writable } from 'svelte/store';
+  import { writable } from 'svelte/store';
 
-//adding cartitem
+  // Store to manage cart items
+  export const cartItems = writable([]);
 
-export const cartItems = writable([]); 
-export const isCartVisible = writable(false)
+  // Store to manage cart visibility
+  export const isCartVisible = writable(false);

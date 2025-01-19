@@ -185,7 +185,7 @@
 						onmouseleave={() => (descriptionHovering = false)}
 					/>
 					<button
-						class="absolute bottom-14 left-1/2 -translate-x-1/2 transform rounded-full bg-[#3926df] px-10 py-3 text-sm font-black tracking-wide opacity-0 transition-opacity duration-300 hover:bg-[#312691] group-hover:opacity-100"
+						class="w-36 h-12 absolute bottom-14 left-1/2 -translate-x-1/2 transform rounded-full bg-[#3926df]  text-sm font-black tracking-wide opacity-0 transition-opacity duration-300 hover:bg-[#312691] group-hover:opacity-100"
 						onclick={() => (selectedItem = item)}>Quick View</button
 					>
 					{#if gridCols === 3}

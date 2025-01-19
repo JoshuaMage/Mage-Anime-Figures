@@ -1,5 +1,6 @@
 // Define the CartItem type
 export type CartItem = {
+	id: any;
     image: string;
     description: string;
     price: number;
